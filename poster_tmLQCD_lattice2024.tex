@@ -48,13 +48,31 @@
 % The second is 25% wide and houses a logo for your university/organization or a photo of you
 % The widths of these boxes can be easily edited to accommodate your content as you see fit
 
+% full affiliation list
+% \newcommand{\Bern}{Institute for Theoretical Physics, Albert Einstein Center for Fundamental Physics,\\University of Bern, Sidlerstrasse 5, CH-3012 Bern, Switzerland}
+% \newcommand{\hiskp}{HISKP (Theory), Rheinische Friedrich-Wilhelms-Universit\"at Bonn,\\Nussallee 14-16, 53115 Bonn, Germany}
+% \newcommand{\hpca}{High Performance Computing and Analytics Lab, Rheinische Friedrich-Wilhelms-Universit\"at Bonn,\\ Friedrich-Hirzebruch-Allee 8, 53115 Bonn, Germany}
+% \newcommand{\CyprusU}{Department of Physics, University of Cyprus, 20537 Nicosia, Cyprus}
+% \newcommand{\CyprusI}{Computation-based Science and Technology Research Center, The Cyprus Institute,\\20 Konstantinou Kavafi Street, 2121 Nicosia, Cyprus}
+% \newcommand{\Jena}{University of Jena, Institute for Theoretical Physics, Max-Wien-Platz 1, D-07743 Jena, Germany}
+% \newcommand{\Parma}{Dipartimento  di  Scienze  Matematiche,  Fisiche  e  Informatiche,  Universit\`a  di  Parma  and  INFN, Gruppo  Collegato  di  Parma,  Parco  Area  delle  Scienze  7/a  (Campus),  43124  Parma,  Italy}
+% \newcommand{\Romadue}{Dipartimento di Fisica and INFN, Universit\`a di Roma ``Tor Vergata",\\Via della Ricerca Scientifica 1, I-00133 Roma, Italy}
+% \newcommand{\Romatre}{Dipartimento di Matematica e Fisica, Universit\`a Roma Tre and INFN, Sezione di Roma Tre,\\Via della Vasca Navale 84, I-00146 Rome, Italy}
+% \newcommand{\RomatreINFN}{Istituto Nazionale di Fisica Nucleare, Sezione di Roma Tre,\\Via della Vasca Navale 84, I-00146 Rome, Italy}
+% \newcommand{\NIC}{NIC, DESY, Platanenallee 6, D-15738 Zeuthen, Germany}
+% \newcommand{\Berlin}{Institut f\"ur Physik, Humboldt-Universit\"at zu Berlin, Newtonstrasse 15, 12489 Berlin, Germany}
+
 \begin{minipage}[b]{0.74\linewidth}
-    \VeryHuge \color{NavyBlue} \textbf{Status of the ETMC ensemble generation effort} \color{Black}\\ % Title
+    \VeryHuge \color{NavyBlue} \textbf{Status of the ETMC ensemble generation effort} \color{Black}\\[1.4cm] % Title
     % \Huge\textit{Subtitle}\\[2.4cm] % Subtitle
-    \Large \textbf{M.~Garofalo$^{a)}$, B.~Kostrzewa$^{b)}$}\\[0.5cm] % Author(s)
-    \Large $^{a)}$ Helmholtz-Institut f{\"u}r Strahlen- und Kernphysik (Theorie), University of Bonn, 53115 Bonn, Germany\\
-    \Large $^{b)}$ High Performance Computing and Analytics Lab, University of Bonn, 53115 Bonn, Germany\\
-    % \Large \texttt{saibi-hakim@mine.kyushu-u.ac.jp} --- +81 (092) 802 3316\\
+    \Large \textbf{A.~Constantia$^{a)b)}$, B.~Simone$^{b)}$, F.~Jacob$^{c)}$, F,~Roberto$^{d)}$ M.~Garofalo$^{e)}$, B.~Kostrzewa$^{f)}$, K.~Giannis$^{b)}$, R.~Simone$^{g)}$, U.~Carsten$^{e)}$, W.~Urs$^{g)}$}\\[0.5cm] % Author(s)
+    \large $^{a)}$ Department of Physics, University of Cyprus, 20537 Nicosia, Cyprus\\
+    \large $^{b)}$ Computation-based Science and Technology Research Center, The Cyprus Institute, 2121 Nicosia, Cyprus\\
+    \large $^{c)}$ Theoretical Physics Department, CERN 1211 Geneva 23, Switzerland\\
+    \large $^{d)}$ Dipartimento di Fisica and INFN, Universit\`a di Roma ``Tor Vergata", I-00133 Roma, Italy\\
+    \large $^{e)}$ Helmholtz-Institut f{\"u}r Strahlen- und Kernphysik (Theorie), University of Bonn, 53115 Bonn, Germany\\
+    \large $^{f)}$ High Performance Computing and Analytics Lab, University of Bonn, 53115 Bonn, Germany\\
+    \large $^{g)}$  Institute for Theoretical Physics, Albert Einstein Center for Fundamental Physics, University of Bern, CH-3012 Bern, Switzerland\\
 \end{minipage}
 %
 \begin{minipage}[b]{0.26\linewidth}
@@ -75,7 +93,11 @@
     \color{Navy} % Navy color for the abstract
 
     \begin{abstract}
-        The electrical energy from renewables in Algeria contributed about 3.4\% (280 MW) in 2008 of a total power of 8.1 GWe and will reach 5\% by the year 2017 according to the Algerian Electricity and Gas Regulation Commission (CREG). The country’s target is reaching 40\% by 2030. The geothermal resources in Algeria are of low-enthalpy type. Most of these geothermal resources are located in the north of the country and generate a heat discharge of 240 MWt.
+        We report the status of the ensemble generation effort of the Extended Twisted Mass Collaboration towards
+        controlled continuum and infinite volume extrapolations for a variety of physical observables through simulations employing Nf = 2 + 1 + 1 Wilson clover twisted mass fermions at physical quark masses using five
+        lattice spacings. We further give an update on the status of the tmLQCD software suite. Through extensions
+        of the QUDA lattice QCD library and a corresponding interface in tmLQCD, we are able to offload a significant portion of our HMC to GPUs, enabling efficient simulations on the current generation of heterogeneous
+        machines.
     \end{abstract}
     %----------------------------------------------------------------------------------------
     %	INTRODUCTION
@@ -83,11 +105,7 @@
 
     \color{Black} % SaddleBrown color for the introduction
     \section*{Introduction}
-    Algeria is situated in northern Africa, bordering the Mediterranean Sea, between Morocco and Tunisia. Algeria has the 9th-largest reserves of natural gas in the world. It ranks 16th in proved oil reserves. Currently, more than 98 \% of Algeria's electricity generation comes from fossil-fuel resources.
-    \begin{itemize}
-        \item Geothermal exploration program started in 1967 by National Oil Comapny SONATRACH.
-        \item From 1983 onwards the geothermal research has been continued by the Renewable Energies Center of Algeria (CDER).
-    \end{itemize}
+
 
     %----------------------------------------------------------------------------------------
     %	CONCLUSIONS
