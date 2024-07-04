@@ -1,0 +1,166 @@
+\newcommand{\tr}{\operatorname{Tr}}
+\newcommand{\re}{\operatorname{Re}}
+\newcommand{\im}{\operatorname{Im}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ID}{\mathbb{I}}
+\newcommand{\rf}{\mathcal{R}_5^{\mathbf{sp}}}
+\newcommand{\hQpm}{\hat Q^{\pm}}
+\newcommand{\hWpm}{\hat W^{\pm}}
+\newcommand{\hQp}{\hat Q^{+}}
+\newcommand{\hQm}{\hat Q^{-}}
+\newcommand{\hWp}{\hat W^{+}}
+\newcommand{\hWm}{\hat W^{-}}
+\newcommand{\Wpm}{W^{\pm}}
+\newcommand{\Qpm}{Q^{\pm}}
+\newcommand{\Qp}{Q^{+}}
+\newcommand{\Qm}{Q^{-}}
+\newcommand{\Wp}{W^{+}}
+\newcommand{\Wm}{W^{-}}
+\newcommand{\Qnd}{Q_{\textrm{ND}}}
+\newcommand{\Tee}{T_{ee}}
+\newcommand{\Too}{T_{oo}}
+\newcommand{\Moe}{M_{oe}}
+\newcommand{\Moo}{M_{oo}}
+\newcommand{\Meo}{M_{eo}}
+\newcommand{\Mee}{M_{ee}}
+\newcommand{\order}{\mathcal{O}}
+
+\newcommand{\Sg}{S_\mathrm{G}}
+\newcommand{\Sdeg}{S_\mathrm{deg}}
+\newcommand{\Smusig}{S_{\mu_\sigma}}
+\newcommand{\Sdel}{S_\delta}
+\newcommand{\mudel}{\mu_\delta}
+\newcommand{\musig}{\mu_\sigma}
+\newcommand{\mutilsig}{\tilde{\mu}_\sigma}
+\newcommand{\mutildel}{\tilde{\mu}_\delta}
+\newcommand{\mul}{\mu_\ell}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\dtau}{\delta\tau}
+
+\newcommand{\csw}{c_\mathrm{sw}}
+\newcommand{\mpcac}{m_\mathrm{PCAC}}
+\newcommand{\Ntraj}{N_\mathrm{traj}}
+\newcommand{\Nmeas}{N_\mathrm{meas}}
+\newcommand{\Nconf}{N_\mathrm{conf}}
+\newcommand{\Mpi}{M_{\pi^\pm}}
+\newcommand{\Mphyspi}{M_{\pi^\pm}^\mathrm{phys}}
+\newcommand{\Fpi}{f_{\pi^\pm}}
+\newcommand{\Mpin}{M_{\pi^0}}
+\newcommand{\Mpinc}{M_{\pi^{(0,c)}}}
+\newcommand{\ld}{\mathrm{(LD)}}
+\newcommand{\cd}{\mathrm{(CD)}}
+
+\newcommand{\fnabla}{\nabla^\mathrm{f}}
+\newcommand{\bnabla}{\nabla^\mathrm{b}}
+
+\newcommand{\mps}{M_\mathrm{P}}
+\newcommand{\ps}{\mathrm{P}}
+\newcommand{\mpi}{M_\pi}
+\newcommand{\mphyspi}{M_{\pi}^\mathrm{phys}}
+\newcommand{\fps}{f_\mathrm{P}}
+\newcommand{\fpi}{f_\pi}
+\newcommand{\mcrit}{m_\mathrm{crit}}
+\newcommand{\mw}{m_\mathrm{W}}
+\newcommand{\kc}{\kappa_c}
+\newcommand{\mn}{M_\mathrm{N}}
+\newcommand{\dof}{\mathrm{dof}}
+
+\newcommand{\lmin}{\lambda_\mathrm{min}}
+\newcommand{\lmax}{\lambda_\mathrm{max}}
+\newcommand{\qcdlambda}{\Lambda_\mathrm{QCD}}
+
+\newcommand{\chipt}{$\chi$PT}
+\newcommand{\wchipt}{W$\chi$PT}
+\newcommand{\wtmchipt}{Wtm$\chi$PT}
+
+\newcommand{\dingcircle}{\ding{108}}
+\newcommand{\dingsquare}{\ding{110}}
+\newcommand{\dingrhombus}{\ding{117}}
+\newcommand{\dingtriangle}{\ding{115}}
+
+\newcommand{\mev}{~\mathrm{MeV}}
+\newcommand{\gev}{~\mathrm{GeV}}
+\newcommand{\fm}{~\mathrm{fm}}
+
+\newcommand{\nmev}{\mathrm{MeV}}
+\newcommand{\ngev}{\mathrm{GeV}}
+\newcommand{\nfm}{\mathrm{fm}}
+
+\newcommand{\Fav}{\|F\|_\mathrm{av}^2}
+\newcommand{\Fmax}{\|F\|_\mathrm{max}^2}
+\newcommand{\Fsq}{\|F\|^2}
+\newcommand{\mutil}{\tilde{\mu}}
+\newcommand{\rhotil}{\tilde{\rho}}
+\newcommand{\ctil}{\tilde{c}_\mathrm{sw}}
+
+\newcommand{\talkcite}[1]{{\footnotesize \textcolor{blue}{[#1]}}}
+
+\newcommand{\backupbegin}{
+   \newcounter{finalframe}
+   \setcounter{finalframe}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \setcounter{framenumber}{\value{finalframe}}
+}
+
+% full page width float
+%   \checkoddpage
+%   \edef\side{\ifoddpage l\else r\fi}%
+%   \makebox[\textwidth][\side]{%
+%   \begin{minipage}{1.35\linewidth}
+%   \end{minipage}
+%   }%
+
+% margin figure
+% \marginpar{
+%   \centering
+%   \includegraphics[width=\linewidth]{}
+%   \captionof{figure}[]{}
+%   \label{}
+% }
+
+% \newtcolorbox{hpcablock}[2][]{%
+%   left=3pt,
+%   right=3pt,
+%   top=3pt,
+%   bottom=3pt,
+%   colback=bg,
+%   colframe=structure!100,
+%   fonttitle=\sffamily,
+%   coltitle=structure!100,
+%   colbacktitle=structure!10,
+%   enhanced,
+%   attach boxed title to top,
+%   title=#2,
+%   #1}
+
+% \newtcolorbox{hpcaexampleblock}[2][]{%
+%   left=3pt,
+%   right=3pt,
+%   top=3pt,
+%   bottom=3pt,
+%   colback=bg,
+%   colframe=example text.fg!100,
+%   fonttitle=\sffamily,
+%   coltitle=example text.fg!100,
+%   colbacktitle=example text.fg!10,
+%   enhanced,
+%   attach boxed title to top left,
+%   title=#2,
+%   #1}
+
+% \newtcolorbox{hpcaalertblock}[2][]{%
+%   left=3pt,
+%   right=3pt,
+%   top=3pt,
+%   bottom=3pt,
+%   colback=bg,
+%   colframe=alert!100,
+%   fonttitle=\sffamily,
+%   coltitle=alert!100,
+%   colbacktitle=alert!10,
+%   enhanced,
+%   attach boxed title to top left,
+%   title=#2,
+%   #1}
