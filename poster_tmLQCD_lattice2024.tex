@@ -125,7 +125,7 @@
         \det{(\hat Q_{+}\hat Q_{-})}
         \det{(\hat Q_h)} \det{(M_{ee}^{h})} &  &
     \end{flalign*}
-    with the degenerate operator written in term of the even/odd part of the operator
+    with the degenerate operator written in terms of the even/odd part of the operator
     \begin{flalign*}
         \hQpm = \gamma_5 \left[  \Moo   - \Moe \Mee^{-1} \Meo \right] \,,\quad \quad
         \Mee =1 + 2\kappa c_{SW} T_{ee} + i\tilde\mu\gamma_5 \,, \quad \quad M_{deg} =\gamma_5 \begin{pmatrix}
@@ -133,7 +133,7 @@
                                                                                                    M_{oe} & M_{oo} \\
                                                                                                \end{pmatrix} &  &
     \end{flalign*}
-    while the non degenerate operator is a two-flavour operators
+    while the non-degenerate operator is a two-flavour operators
     \begin{flalign*}
         \hat	Q_h = \gamma_5 \left[ ( \Moo^h + i \mu_\sigma \gamma_5 \tau^3 - \mu_\delta \tau^1 ) - \Moe^h (\Mee^h + i \mu_\sigma \gamma_5 \tau^3 - \mu_\delta \tau^1 )^{-1} \Meo^h \right] &  &
     \end{flalign*}
@@ -162,7 +162,7 @@
         e^{-S_{PF}^{1h}} e^{-S_{PF}^{2h}}...\,
         e^{-S_{corr}}\,.
     \end{flalign*}
-    The corresponding equation of motion:
+    The corresponding equation of motion to be integrated in the HMC are
     \begin{align*}
         \partial_t U   & =\Pi                \\
         \partial_t \Pi & =-\delta S_{gauge}-
@@ -170,6 +170,15 @@
         \delta S^h_{det} -\delta S^{1h}_{PF} - \delta S^{2h}_{PF}-...-
         \delta S_{corr}\,.
     \end{align*}
+
+    %----------------------------------------------------------------------------------------
+    %	tmLQCD + QUDA
+    %----------------------------------------------------------------------------------------
+    \section{tmLQCD+QUDA}
+
+    An efficient usage of the GPUs is achieved in tmLQCD thought the usage of QUDA
+    \cite{Clark:2009wm,Babich:2011np}. As first step in interfacing tmLQCD to QUDA \cite{Kostrzewa:2022hsv} the most expensive part of the HMC, i.e. the inversion of the various dirac operators was offloaded to QUDA.  In the last year we successfully offload to QUDA all the algebra of the force computation. In this way tmLQCD reaches a GPU utilization of about {90\% \color{red} MG:check this}. 
+
     %----------------------------------------------------------------------------------------
     %	CONCLUSIONS
     %----------------------------------------------------------------------------------------
@@ -177,17 +186,30 @@
     \color{SaddleBrown} % SaddleBrown color for the conclusions to make them stand out
 
     \section*{Conclusions}
-    Despite being a petroleum- and gas-rich country, Algeria is making efforts to exploit its renewable energies. The Algerian government has adopted new renewable energy laws and financial support for the investors to facilitate the exploitation of the renewable energies for electricity production and direct utilizations. Algeria has relatively abundant geothermal resources especially in the northeastern parts but not totally used.
     \color{Black} % Set the color back to DarkSlateGray for the rest of the content
 
     %----------------------------------------------------------------------------------------
     %	FORTHCOMING RESEARCH
     %----------------------------------------------------------------------------------------
 
-    \section*{Forthcoming Research}
+    \section*{Acknowledgments}
 
-    Simulation of thermodynamic properties of the thermal fluid and power output with longevity using geological, hydrogeological, and geothermal data from NE-Algerian geothermal reservoirs.
-
+    We would like to thank the QUDA developers for their tremendous work as well as the many pleasant and productive
+    interactions during this and previous efforts. We thank the ETMC for the most enjoyable collaboration. B.K. was funded
+    by HPC.NRW.
+    % for part of this work. S.B. and J.F. are supported by the H2020 project PRACE 6-IP (grant agreement No.
+    % 82376) and the EuroCC project (grant agreement No. 951740).
+    % We acknowledge support by the European Joint Doctorate
+    % program STIMULATE grant agreement No. 765048.
+    % This work is supported by the Deutsche Forschungsgemeinschaft
+    % (DFG, German Research Foundation) and the NSFC through the funds provided to the Sino-German Collaborative
+    % Research Center CRC 110 “Symmetries and the Emergence of Structure in QCD” (DFG Project-ID 196253076 - TRR
+    % 110, NSFC Grant No. 12070131001).
+    The authors gratefully acknowledge the Gauss Centre for Supercomputing e.V.
+    (www.gauss-centre.eu) for funding this project through computing time on the GCS supercomputer JUWELS Booster
+    at the Jülich Supercomputing Centre.
+    % Some of the runs done for this work were carried out on the Bender GPU cluster
+    % at the University of Bonn and we gratefully acknowledge support by the HRZ-HPC team.
     %----------------------------------------------------------------------------------------
     %	REFERENCES
     %----------------------------------------------------------------------------------------
