@@ -176,17 +176,19 @@
     % \end{align*}
 
     \section{Overview of current ensembles}
-    \includegraphics[height=16cm]{ensembles_asquared_mpi}
-    \includegraphics[height=16cm]{ensembles_L_vs_mpi}
+    \begin{center}
+      \includegraphics[height=15cm]{ensembles_asquared_mpi}
+      \includegraphics[height=15cm]{ensembles_L_vs_mpi}
+    \end{center}
 
     \section{Ensembles close to the physical point}
-    \begin{minipage}{0.49\linewidth}
-        \includegraphics[width=\linewidth]{ensembles_phys_point}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.49\linewidth}
-        % \textcolor{red}{\textbf{$g_\mu-2$ continuum extrapolation here}}
-        \includegraphics[width=\linewidth]{amu_s_W_a4}
+
+    \begin{minipage}[t]{\linewidth}
+      \begin{center}
+        \includegraphics[height=14cm]{ensembles_phys_point}
+        \hspace{2cm}
+        \includegraphics[height=13cm]{amu_s_W_a4}
+      \end{center}
     \end{minipage}
 
     \textcolor{red}{\textbf{Some general points about our ensembles}}
@@ -197,7 +199,7 @@
         \textbf{\hspace{3cm}Gradient-flowed energy density}\\
         \includegraphics[width=\linewidth,page=1]{data/gf_observables/gf_observables_md_histories}
         \begin{itemize}
-            \item Long $\tau_\mathrm{int}$ in gradient flow scales at coarse lattice spacing due to lattice artefacts. Not negligible at fine lattice spacing.
+            \item Long $\tau_\mathrm{int}$ in $w_0/a$ at coarse lattice spacing, not negligible at fine lattice spacing.
         \end{itemize}
     \end{minipage}
     \hfill
@@ -219,6 +221,35 @@
 
     An efficient usage of the GPUs is achieved in tmLQCD thought the usage of QUDA
     \cite{Clark:2009wm,Babich:2011np}. As first step in interfacing tmLQCD to QUDA \cite{Kostrzewa:2022hsv} the most expensive part of the HMC, i.e. the inversion of the various dirac operators was offloaded to QUDA.  In the last year we successfully offload to QUDA all the algebra of the force computation. In this way tmLQCD reaches a GPU utilization of about {90\% \color{red} MG:check this}.
+
+    \begin{center}
+      \textbf{real-time speedup through increased GPU offloading}\\
+      left to right:\\
+      CPU only, GPU solves only, GPU $N_f=2$ force, full GPU $N_f=2+1+1$ force
+    \end{center}
+    \vspace{0.5cm}
+    \begin{minipage}{0.5\linewidth}
+      \centering
+      \includegraphics[width=0.65\linewidth,page=2]{data/tmLQCD_performance/quda_speedup}\\
+      \includegraphics[width=0.80\linewidth,page=1]{data/tmLQCD_scaling/HMC_Scaling}\\
+      \textbf{Juwels Booster strong scaling $(64^3 \cdot 128)$}\\
+    \end{minipage}
+    \begin{minipage}{0.5\linewidth}
+      \centering
+      \includegraphics[width=0.65\linewidth,page=1]{data/tmLQCD_performance/quda_speedup}\\
+      \includegraphics[width=0.80\linewidth,page=2]{data/tmLQCD_scaling/HMC_Scaling}\\
+      \textbf{LUMI-G strong scaling $(112^3 \cdot 224)$}\\
+      %\begin{itemize}
+      %  \item From left to right for each volume:
+      %  \begin{itemize} 
+      %    \item CPU run
+      %    \item GPU run offloading only solves
+      %    \item GPU run offloading solves and $N_f=2$ light quark force
+      %    \item GPU run offloading solves and full $N_f=2+1+1$ quark force
+      %  \end{itemize}
+      %\item Up to factor 2.9 speedup in time per trajectory and much more in terms of energy cost per trajectory
+      %\end{itemize}
+    \end{minipage}
 
     %----------------------------------------------------------------------------------------
     %	CONCLUSIONS

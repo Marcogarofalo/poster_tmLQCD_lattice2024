@@ -1,0 +1,9 @@
+ens    machine                              algo                                nodes   corespernode    trajtime      
+E112   "Frontera, 343 nodes, 19208 cores"   "tmLQCD + QPhiX + DD-$\\alpha$AMG"  343     56              20500
+E112   "LUMI-G, 28 nodes, \,\, 112 AMD MI250"        "QUDA solves only"                  28      NA              13700
+E112   "LUMI-G, 28 nodes, \,\, 112 AMD MI250"        "QUDA light force"                  28      NA              11900
+E112   "LUMI-G, 28 nodes, \,\, 112 AMD MI250"        "QUDA all forces"                   28      NA              8000
+B64    "SuperMUC, 512 nodes, 4096 cores"    "tmLQCD + DD-$\\alpha$AMG"          512     8               9000
+B64    "Juwels Booster, 8 nodes, 32 NVIDIA A100"   "QUDA solves only"                  8       NA              6380
+B64    "Juwels Booster, 8 nodes, 32 NVIDIA A100"   "QUDA light force"                  8       NA              4890
+B64    "Juwels Booster, 8 nodes, 32 NVIDIA A100"   "QUDA all forces"                   8       NA              3197

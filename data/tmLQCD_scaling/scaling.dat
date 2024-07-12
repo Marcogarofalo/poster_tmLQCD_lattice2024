@@ -1,0 +1,8 @@
+machine            volume                nodes traj_tts
+"Juwels Booster"   "$64^3 \\cdot 128$"   4     5766
+"Juwels Booster"   "$64^3 \\cdot 128$"   8     3214
+"Juwels Booster"   "$64^3 \\cdot 128$"   16    1876
+"Juwels Booster"   "$64^3 \\cdot 128$"   32    1303
+"LUMI-G"           "$112^# \\cdot 224$"  28    7990
+"LUMI-G"           "$112^# \\cdot 224$"  56    5401
+"LUMI-G"           "$112^# \\cdot 224$"  112   3575
