@@ -8,6 +8,7 @@ require(stringr)
 dat <- read.table("perf.dat", header=TRUE) %>%
        dplyr::group_by(ens) %>%
        dplyr::mutate(speedup = max(trajtime)/trajtime,
+                     trajhour = trajtime/3600,
                      reltime = trajtime/max(trajtime)) %>%
        dplyr::ungroup() %>%
        dplyr::mutate(volume = ifelse(ens == "B64", "$64^3 \\cdot 128$", "$112^3 \\cdot 224$"))
@@ -45,17 +46,18 @@ tikzfiles <- hadron::tikz.init(basename = "quda_speedup",
 for( vol in unique(dat$volume) ){
   vdat <- dplyr::filter(dat, volume == vol)
   p <- ggplot2::ggplot(vdat, aes(x = volume, 
-                                y = reltime, 
+                                y = trajhour, 
                                 colour = reorder(machine, speedup), fill = reorder(machine, speedup))) +
        ggplot2::geom_bar(stat = 'identity',
                          position = position_dodge2(width=1, padding=0.5))+
        ggplot2::theme_bw() +
        ggplot2::labs(x = "4D volume",
-                     y = "time per trajectory (relative)",
+                     y = "time per trajectory [h]",
                      colour = "",
                      fill = "") + 
-       ggplot2::scale_y_continuous(labels = c(1.0, 0.75, 0.5, 0.25, 0.0),
-                                   breaks = c(1.0, 0.75, 0.5, 0.25, 0.0)) +
+       #ggplot2::scale_y_continuous(labels = c(1.0, 0.75, 0.5, 0.25, 0.0),
+       #                            breaks = c(1.0, 0.75, 0.5, 0.25, 0.0)) +
+       ggplot2::scale_y_continuous(breaks = seq(0,6,0.5)) +
        ggplot2::scale_fill_manual(values = cscale,
                                   breaks = clabels,
                                   labels = clabels) + #stringr::str_wrap(clabels, 24)) +
