@@ -22,6 +22,7 @@
 \documentclass[a0,portrait]{a0poster}
 
 \usepackage{multicol} % This is so we can have multiple columns of text side-by-side
+\usepackage{multirow}
 \columnsep=100pt % This is the amount of white space between the columns in the poster
 \columnseprule=3pt % This is the thickness of the black line between the columns in the poster
 
@@ -36,6 +37,10 @@
 \usepackage[font=small,labelfont=bf]{caption} % Required for specifying captions to tables and figures
 \usepackage{amsfonts, amsmath, amsthm, amssymb} % For math fonts, symbols and environments
 \usepackage{wrapfig} % Allows wrapping text around tables and figures
+
+\usepackage{titlesec}
+\titleformat{\section}[block]{\Large\bfseries\filcenter}{}{1em}{}
+\titleformat{\subsection}[hang]{\bfseries\large\filcenter}{}{1em}{}
 
 \input{commands}
 
@@ -67,7 +72,7 @@
 \begin{minipage}[b]{0.74\linewidth}
     \VeryHuge \color{NavyBlue} \textbf{Status of the ETMC ensemble generation effort} \color{Black}\\[1.4cm] % Title
     % \Huge\textit{Subtitle}\\[2.4cm] % Subtitle
-    \Large \textbf{A.~Constantia$^{a)b)}$, B.~Simone$^{b)}$, F.~Jacob$^{c)}$, F,~Roberto$^{d)}$ M.~Garofalo$^{e)}$, B.~Kostrzewa$^{f)}$, K.~Giannis$^{b)}$, R.~Simone$^{g)}$, U.~Carsten$^{e)}$, W.~Urs$^{g)}$}\\[0.5cm] % Author(s)
+    \Large \textbf{C.~Alexandrou$^{a)b)}$, S.~Bacchio$^{b)}$, J.~Finkenrath$^{c)}$, R.~Frezzotti$^{d)}$ M.~Garofalo$^{e)}$, B.~Kostrzewa$^{f)}$, G.~Koutsou$^{b)}$, S.~Romiti$^{g)}$, A.~Sen$^{(e)}$, C.~Urbach$^{e)}$, U.~Wenger$^{g)}$}\\[0.5cm] % Author(s)
     \large $^{a)}$ Department of Physics, University of Cyprus, 20537 Nicosia, Cyprus\\
     \large $^{b)}$ Computation-based Science and Technology Research Center, The Cyprus Institute, 2121 Nicosia, Cyprus\\
     \large $^{c)}$ Theoretical Physics Department, CERN 1211 Geneva 23, Switzerland\\
@@ -94,35 +99,39 @@
 
     \color{Navy} % Navy color for the abstract
 
-    \begin{abstract}
-        We report the status of the ensemble generation effort of the Extended Twisted Mass Collaboration towards
-        controlled continuum and infinite volume extrapolations for a variety of physical observables through simulations employing Nf = 2 + 1 + 1 Wilson clover twisted mass fermions at physical quark masses using five
-        lattice spacings. We further give an update on the status of the tmLQCD software suite. Through extensions
-        of the QUDA lattice QCD library and a corresponding interface in tmLQCD, we are able to offload a significant portion of our HMC to GPUs, enabling efficient simulations on the current generation of heterogeneous
-        machines.
-    \end{abstract}
+%    \begin{abstract}
+%        We report the status of the ensemble generation effort of the Extended Twisted Mass Collaboration towards
+%        controlled continuum and infinite volume extrapolations for a variety of physical observables through simulations employing Nf = 2 + 1 + 1 Wilson clover twisted mass fermions at physical quark masses using five
+%        lattice spacings. We further give an update on the status of the tmLQCD software suite. Through extensions
+%        of the QUDA lattice QCD library and a corresponding interface in tmLQCD, we are able to offload a significant portion of our HMC to GPUs, enabling efficient simulations on the current generation of heterogeneous
+%        machines.
+%    \end{abstract}
     %----------------------------------------------------------------------------------------
     %	INTRODUCTION
     %----------------------------------------------------------------------------------------
 
     \color{Black} % SaddleBrown color for the introduction
-    \section*{Introduction}
-    The $Nf =2+1+1$ path integral for twisted mass clover fermions \cite{Frezzotti:2003ni,Frezzotti:2004wz,Sheikholeslami:1985ij} is
+    \subsection*{Introduction}
+    The $Nf =2+1+1$ path integral for twisted mass Wilson clover (tmWc) fermions \cite{Frezzotti:2003ni,Frezzotti:2004wz,Sheikholeslami:1985ij} is
     \begin{flalign*}
-        Z= \int DU D\chi D\bar\chi \,e^{-S_{gauge}-\bar \chi D_{deg}\chi - \bar \chi D_{ndeg} \chi } \,, &  &
+      Z= \int \mathcal{D}U \mathcal{D}\chi \mathcal{D}\bar\chi \,e^{-S_\mathrm{gauge}-\bar \chi D_\ell\chi - \bar \chi D_h \chi } \,, &  &
     \end{flalign*}
-    with the fermions Dirac operator for the degenerate fermions $D_{deg}$ 
-    and the non-degenerate operator $D_{ndeg}$ acting on two-flavours 
-    which require a separate implementation
+    where $D_\ell$ is the Dirac operator for a doublet of light mass-degenerate quarks and $D_h$ is the Dirac operator for a non-degenerate doublet corresponding to the strange and charm contributon:
     \begin{flalign*}
         \label{eq:eosw0}
-        M_{deg} = (D_W[U] + m_0)\ 1_f + i \mu_q\gamma_5\tau^3\, ,\quad\quad
-        M_{ndeg} = (D_W[U] + m_0)\ 1_f +
-        i\bar\mu\gamma_5\tau^3 - \bar\epsilon \tau^1 &  &
+        D_\ell = (\Dsw[U] + m_0)\ 1_f + i \mu_\ell\gamma_5\tau^3\, ,\quad\quad
+        D_h = (\Dsw[U] + m_0)\ 1_f + i\bar\mu\gamma_5\tau^3 - \bar\epsilon \tau^1 &  &
     \end{flalign*}
-    where $D_W$ is the Clover Wilso operator. We use the Hasenbusch trick \cite{Hasenbusch:2001ne} 
-    for the degenerate operator and Rational HMC \cite{Clark:2006fx} for the non degenerate one.
-    For both operator we use Even/odd Preconditioning.
+    where $\Dsw$ is the Wilson clover operator while $m_0$, $\mu_\ell$, $\mubar$ and $\epsbar$ are the various untwisted and twisted mass parameters.
+    We employ Hasenbusch mass-preconditioning \cite{Hasenbusch:2001ne} to split the light quark determinant and and rational HMC \cite{Clark:2006fx} for the non-degenerate. Even-odd preconditioning is used throughout.
+
+    % The various inversions are performed using the most appropriate solver for each monomial.
+    % \vspace{1cm}
+    % \begin{tabular}{p{0.3\linewidth}p{0.7\linewidth}}
+    %   \centering $\frac{1}{\What_{+}(\rho_t) \What_{-}(\rho_t)}$ & double-half mixed-precision CG \\
+    %   \centering $\What_{-}(\rho_t) \frac{1}{\What_{+}(\rho_b) \What_{-}(\rho_b)} \What_{+}(\rho_t)$ & double-half mixed precision CG or multigrid-preconditoned GCR depending on $\rho_b$ \\
+    %   \centering $\prod_{i=n_\ell}^{n_k} \frac{ \Qhat^2_h + a_{2i-1} }{ \Qhat^2_h + a_{2i} }$ & single precision multi-shift CG with double-half precision shift-by-shift refinement 
+    % \end{tabular}
     % Integrating fermion variables and using Even/odd Preconditioning
     % \begin{flalign*}
     %     Z= \int DU  \,e^{-S_{gauge} }\det{\left(M_{ee}^+M_{ee}^-\right)}
@@ -175,25 +184,34 @@
     %     \delta S_{corr}\,.
     % \end{align*}
 
-    \section{Overview of current ensembles}
+
+    \subsection*{Overview of current ensembles}
     \begin{center}
-      \includegraphics[height=15cm]{ensembles_asquared_mpi}
+      \includegraphics[height=15cm]{ensembles_asquared_mpi}\hspace{1cm}
       \includegraphics[height=15cm]{ensembles_L_vs_mpi}
     \end{center}
+    \begin{itemize}
+      \item 7 approximate pion mass values: 135 MeV $\leq M_\pi \leq $ 340 MeV
+      \item 6 lattice spacings: 0.049 fm $\leq a \leq$ 0.091 fm
+      \item 5 lattice spacings close to or at the physical pion mass
+      \item multiple volumes at many pion mass points
+    \end{itemize}
+    \subsection*{Ensembles close to the physical point}
 
-    \section{Ensembles close to the physical point}
-
-    \begin{minipage}[t]{\linewidth}
+    \begin{minipage}{0.42\linewidth}
       \begin{center}
-        \includegraphics[height=14cm]{ensembles_phys_point}
-        \hspace{2cm}
-        \includegraphics[height=13cm]{amu_s_W_a4}
+        \includegraphics[width=\linewidth]{ensembles_phys_point}
+      \end{center}
+    \end{minipage}
+    \hspace{0.04\linewidth}
+    \begin{minipage}{0.52\linewidth}
+      \begin{center}
+        \textbf{Continuum extrapolaton of $a_\mu^W(s)$ using 3 or 4 lattice spacings}
+        \includegraphics[width=\linewidth]{amu_s_W_a4}
       \end{center}
     \end{minipage}
 
-    \textcolor{red}{\textbf{Some general points about our ensembles}}
-
-    \section{Statistical properties close to the physical pion mass}
+    \subsection*{Statistical properties close to the physical pion mass}
     \begin{minipage}{0.48\linewidth}
         \centering
         \textbf{\hspace{3cm}Gradient-flowed energy density}\\
@@ -212,15 +230,22 @@
         \end{itemize}
     \end{minipage}
 
+    \subsection*{Algorithmic choices for the MD Hamiltonian}
+    \noindent The molecular dynamics Hamiltonian is decomposed into monomials which are integrated on different time scales according to their contribution to the force using a second order force-gradient integrator (2MNFG). The inversions are performed using the most appropriate solver for each monomial.
+    \vspace{0.5cm}
 
+    \begin{tabular}{p{0.08\linewidth}p{0.2\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
+    \multirow{2}{*}{$\What_\pm(\rho)$} & even-odd & \centering $\frac{1}{\What_{+}(\rho_t) \What_{-}(\rho_t)}$ & double-half mixed precision CG \\
+      & mass precon & \centering $\What_{-}(\rho_t) \frac{1}{\What_{+}(\rho_b) \What_{-}(\rho_b)} \What_{+}(\rho_t)$ & multigrid-preconditoned GCR depending on $\rho$ \\
+      $\Qhat_h$ & e/o precon, non-degenerate, RHMC & \centering $\prod_{i=n_\ell}^{n_k} \frac{ \Qhat^2_h + a_{2i-1} }{ \Qhat^2_h + a_{2i} }$ & single precision multi-shift CG with double-half precision shift-by-shift refinement
+    \end{tabular}
 
     %----------------------------------------------------------------------------------------
     %	tmLQCD + QUDA
     %----------------------------------------------------------------------------------------
-    \section{tmLQCD+QUDA}
+    \subsection*{tmLQCD+QUDA}
 
-    An efficient usage of the GPUs is achieved in tmLQCD thought the usage of QUDA
-    \cite{Clark:2009wm,Babich:2011np}. As first step in interfacing tmLQCD to QUDA \cite{Kostrzewa:2022hsv} the most expensive part of the HMC, i.e. the inversion of the various dirac operators was offloaded to QUDA.  In the last year we successfully offload to QUDA all the algebra of the force computation. In this way tmLQCD reaches a GPU utilization of about {90\% \color{red} MG:check this}.
+    An efficient usage of the GPUs is achieved in tmLQCD via the QUDA library~\cite{Clark:2009wm,Babich:2011np}. As first step in interfacing tmLQCD to QUDA \cite{Kostrzewa:2022hsv} the most expensive part of the HMC, i.e. the inversion of the various Dirac operators and the gauge force were offloaded. In the last year we further offloaded all computations of the fermionic force. In this way, tmLQCD can reach GPU utilizations in excess of 70\% and even up to 90\% depending on the number of available CPU cores per GPU.
 
     \begin{center}
       \textbf{real-time speedup through increased GPU offloading}\\
@@ -231,25 +256,25 @@
     \begin{minipage}{0.5\linewidth}
       \centering
       \includegraphics[width=0.65\linewidth,page=2]{data/tmLQCD_performance/quda_speedup}\\
-      \includegraphics[width=0.80\linewidth,page=1]{data/tmLQCD_scaling/HMC_Scaling}\\
-      \textbf{Juwels Booster strong scaling $(64^3 \cdot 128)$}\\
     \end{minipage}
     \begin{minipage}{0.5\linewidth}
       \centering
       \includegraphics[width=0.65\linewidth,page=1]{data/tmLQCD_performance/quda_speedup}\\
-      \includegraphics[width=0.80\linewidth,page=2]{data/tmLQCD_scaling/HMC_Scaling}\\
-      \textbf{LUMI-G strong scaling $(112^3 \cdot 224)$}\\
-      %\begin{itemize}
-      %  \item From left to right for each volume:
-      %  \begin{itemize} 
-      %    \item CPU run
-      %    \item GPU run offloading only solves
-      %    \item GPU run offloading solves and $N_f=2$ light quark force
-      %    \item GPU run offloading solves and full $N_f=2+1+1$ quark force
-      %  \end{itemize}
-      %\item Up to factor 2.9 speedup in time per trajectory and much more in terms of energy cost per trajectory
-      %\end{itemize}
     \end{minipage}
+
+    \begin{minipage}{0.5\linewidth}
+      \centering
+      \textbf{Juwels Booster strong scaling $(64^3 \cdot 128)$}\\
+      \includegraphics[width=0.80\linewidth,page=1]{data/tmLQCD_scaling/HMC_Scaling}\\
+    \end{minipage}
+    \begin{minipage}{0.5\linewidth}
+      \centering
+      \textbf{LUMI-G strong scaling $(112^3 \cdot 224)$}\\
+      \includegraphics[width=0.80\linewidth,page=2]{data/tmLQCD_scaling/HMC_Scaling}\\
+    \end{minipage}
+    
+    
+
 
     %----------------------------------------------------------------------------------------
     %	CONCLUSIONS

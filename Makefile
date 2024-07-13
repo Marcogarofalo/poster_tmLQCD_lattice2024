@@ -1,6 +1,6 @@
 all: poster_tmLQCD_lattice2024.pdf abstract.pdf
 
-poster_tmLQCD_lattice2024.pdf: poster_tmLQCD_lattice2024.tex Makefile figures/*.pdf
+poster_tmLQCD_lattice2024.pdf: poster_tmLQCD_lattice2024.tex commands.tex Makefile figures/*.pdf
 	latexmk -shell-escape -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make $<
 
 abstract.pdf: abstract.md
