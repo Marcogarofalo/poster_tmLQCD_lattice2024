@@ -113,18 +113,18 @@
 
     \color{Black} % SaddleBrown color for the introduction
     \subsection*{Introduction}
-    The $Nf =2+1+1$ path integral for twisted mass Wilson clover (tmWc) fermions \cite{Frezzotti:2003ni,Frezzotti:2004wz,Sheikholeslami:1985ij} is
-    \begin{flalign*}
-      Z= \int \mathcal{D}U \mathcal{D}\chi \mathcal{D}\bar\chi \,e^{-S_\mathrm{gauge}-\bar \chi D_\ell\chi - \bar \chi D_h \chi } \,, &  &
-    \end{flalign*}
+    The $Nf =2+1+1$ path integral for twisted mass Wilson clover fermions \cite{Frezzotti:2003ni,Frezzotti:2004wz,Sheikholeslami:1985ij} is
+    \begin{equation*}
+      Z= \int \mathcal{D}U \mathcal{D}\chi \mathcal{D}\bar\chi \,e^{-S_\mathrm{gauge}-\bar \chi D_\ell\chi - \bar \chi D_h \chi } \,,
+    \end{equation*}
     where $D_\ell$ is the Dirac operator for a doublet of light mass-degenerate quarks and $D_h$ is the Dirac operator for a non-degenerate doublet corresponding to the strange and charm contributon:
-    \begin{flalign*}
+    \begin{equation*}
         \label{eq:eosw0}
         D_\ell = (\Dsw[U] + m_0)\ 1_f + i \mu_\ell\gamma_5\tau^3\, ,\quad\quad
-        D_h = (\Dsw[U] + m_0)\ 1_f + i\bar\mu\gamma_5\tau^3 - \bar\epsilon \tau^1 &  &
-    \end{flalign*}
+        D_h = (\Dsw[U] + m_0)\ 1_f + i\bar\mu\gamma_5\tau^3 - \bar\epsilon \tau^1
+    \end{equation*}
     where $\Dsw$ is the Wilson clover operator while $m_0$, $\mu_\ell$, $\mubar$ and $\epsbar$ are the various untwisted and twisted mass parameters.
-    We employ Hasenbusch mass-preconditioning \cite{Hasenbusch:2001ne} to split the light quark determinant and and rational HMC \cite{Clark:2006fx} for the non-degenerate. Even-odd preconditioning is used throughout.
+    We employ Hasenbusch mass-preconditioning \cite{Hasenbusch:2001ne} to split the light quark determinant and rational HMC \cite{Clark:2006fx} with split partial fractions the non-degenerate one. Even-odd preconditioning is used throughout.
 
     % The various inversions are performed using the most appropriate solver for each monomial.
     % \vspace{1cm}
@@ -250,8 +250,7 @@
 
     \begin{center}
       \textbf{real-time speedup through increased GPU offloading}\\
-      left to right:\\
-      CPU only, GPU solves only, GPU $N_f=2$ force, full GPU $N_f=2+1+1$ force
+      (left to right) CPU only, GPU solves only, GPU $N_f=2$ force, full GPU $N_f=2+1+1$ force
     \end{center}
     \vspace{0.5cm}
     \begin{minipage}{0.5\linewidth}
