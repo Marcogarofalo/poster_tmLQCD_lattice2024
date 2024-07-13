@@ -243,7 +243,7 @@
     %----------------------------------------------------------------------------------------
     %	tmLQCD + QUDA
     %----------------------------------------------------------------------------------------
-    \subsection*{tmLQCD+QUDA}
+    \subsection*{tmLQCD + QUDA}
 
     An efficient usage of GPUs is achieved in tmLQCD via the QUDA library~\cite{Clark:2009wm,Babich:2011np}. As first step in interfacing tmLQCD to QUDA \cite{Kostrzewa:2022hsv} the most expensive part of the HMC, i.e. the inversion of the various Dirac operators and the gauge force were offloaded. In the last year we further offloaded all computations of the fermionic force. In this way, tmLQCD can reach GPU utilizations in excess of 70\% and even up to 90\% depending on the number of available CPU cores per GPU.
 
