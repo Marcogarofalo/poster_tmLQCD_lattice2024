@@ -18,7 +18,7 @@ cscale <- brewer_pal[c(4,3,2,1)]
 clabels <- unique(dat$machine)[c(3,4,1,2)]
 
 tikzfiles <- hadron::tikz.init(basename = "quda_speedup",
-                               width = 2.5, height = 3.5)
+                               width = 3, height = 4)
 #p <- ggplot2::ggplot(dat, aes(x = reorder(volume, ifelse(ens == "B64", 1, 2)), 
 #                              y = reltime, 
 #                              colour = reorder(machine, speedup), fill = reorder(machine, speedup))) +
@@ -48,7 +48,7 @@ for( vol in unique(dat$volume) ){
                                 y = reltime, 
                                 colour = reorder(machine, speedup), fill = reorder(machine, speedup))) +
        ggplot2::geom_bar(stat = 'identity',
-                         position = "dodge2") +
+                         position = position_dodge2(width=1, padding=0.5))+
        ggplot2::theme_bw() +
        ggplot2::labs(x = "4D volume",
                      y = "time per trajectory (relative)",
