@@ -68,23 +68,24 @@
 % \newcommand{\RomatreINFN}{Istituto Nazionale di Fisica Nucleare, Sezione di Roma Tre,\\Via della Vasca Navale 84, I-00146 Rome, Italy}
 % \newcommand{\NIC}{NIC, DESY, Platanenallee 6, D-15738 Zeuthen, Germany}
 % \newcommand{\Berlin}{Institut f\"ur Physik, Humboldt-Universit\"at zu Berlin, Newtonstrasse 15, 12489 Berlin, Germany}
+    
+{\VeryHuge \color{NavyBlue} \textbf{Status of the ETMC ensemble generation effort} \color{Black}\\[1.4cm]} % Title
 
 \begin{minipage}[b]{0.74\linewidth}
-    \VeryHuge \color{NavyBlue} \textbf{Status of the ETMC ensemble generation effort} \color{Black}\\[1.4cm] % Title
     % \Huge\textit{Subtitle}\\[2.4cm] % Subtitle
-    \Large \textbf{C.~Alexandrou$^{a)b)}$, S.~Bacchio$^{b)}$, J.~Finkenrath$^{c)}$, R.~Frezzotti$^{d)}$ M.~Garofalo$^{e)}$, B.~Kostrzewa$^{f)}$, G.~Koutsou$^{b)}$, S.~Romiti$^{g)}$, A.~Sen$^{(e)}$, C.~Urbach$^{e)}$, U.~Wenger$^{g)}$}\\[0.5cm] % Author(s)
-    \large $^{a)}$ Department of Physics, University of Cyprus, 20537 Nicosia, Cyprus\\
-    \large $^{b)}$ Computation-based Science and Technology Research Center, The Cyprus Institute, 2121 Nicosia, Cyprus\\
-    \large $^{c)}$ Theoretical Physics Department, CERN 1211 Geneva 23, Switzerland\\
-    \large $^{d)}$ Dipartimento di Fisica and INFN, Universit\`a di Roma ``Tor Vergata", I-00133 Roma, Italy\\
-    \large $^{e)}$ Helmholtz-Institut f{\"u}r Strahlen- und Kernphysik (Theorie), University of Bonn, 53115 Bonn, Germany\\
-    \large $^{f)}$ High Performance Computing and Analytics Lab, University of Bonn, 53115 Bonn, Germany\\
-    \large $^{g)}$  Institute for Theoretical Physics, Albert Einstein Center for Fundamental Physics, University of Bern, CH-3012 Bern, Switzerland\\
+    \Large \textbf{C.~Alexandrou$^{(a)(b)}$, S.~Bacchio$^{(b)}$, J.~Finkenrath$^{(c)}$, R.~Frezzotti$^{(d)}$ M.~Garofalo$^{(e)}$, B.~Kostrzewa$^{(f)}$, G.~Koutsou$^{(b)}$, S.~Romiti$^{(g)}$, A.~Sen$^{(e)}$, C.~Urbach$^{(e)}$, U.~Wenger$^{(g)}$}\\[0.5cm] % Author(s)
+    \large $^{(a)}$ Department of Physics, University of Cyprus, 20537 Nicosia, Cyprus\\
+    \large $^{(b)}$ Computation-based Science and Technology Research Center, The Cyprus Institute, 2121 Nicosia, Cyprus\\
+    \large $^{(c)}$ Theoretical Physics Department, CERN 1211 Geneva 23, Switzerland\\
+    \large $^{(d)}$ Dipartimento di Fisica and INFN, Universit\`a di Roma ``Tor Vergata", I-00133 Roma, Italy\\
+    \large $^{(e)}$ Helmholtz-Institut f{\"u}r Strahlen- und Kernphysik (Theorie), University of Bonn, 53115 Bonn, Germany\\
+    \large $^{(f)}$ High Performance Computing and Analytics Lab, University of Bonn, 53115 Bonn, Germany\\
+    \large $^{(g)}$ Institute for Theoretical Physics, Albert Einstein Center for Fundamental Physics, University of Bern, CH-3012 Bern, Switzerland\\
 \end{minipage}
 %
 \begin{minipage}[b]{0.26\linewidth}
     % \includegraphics[width=7cm]{logo.png}\ 
-    \includegraphics[width=14cm]{figures/Logo_ETMC_RGB.pdf}
+    \includegraphics[width=15cm]{figures/Logo_ETMC_RGB.pdf}
 \end{minipage}
 
 \vspace{1cm} % A bit of extra whitespace between the header and poster content
@@ -231,7 +232,7 @@
     \end{minipage}
 
     \subsection*{Algorithmic choices for the MD Hamiltonian}
-    \noindent The molecular dynamics Hamiltonian is decomposed into monomials which are integrated on different time scales according to their contribution to the force using a second order force-gradient integrator (2MNFG). The inversions are performed using the most appropriate solver for each monomial.
+    \noindent The molecular dynamics Hamiltonian is decomposed into monomials which are integrated on different time scales according to their contribution to the force using a second-order minimal norm integrator, including a force-gradient term for large volumes, 2MN(FG). The inversions are performed using the most appropriate solver for each monomial.
     \vspace{0.5cm}
 
     \begin{tabular}{p{0.08\linewidth}p{0.2\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
@@ -255,21 +256,23 @@
     \vspace{0.5cm}
     \begin{minipage}{0.5\linewidth}
       \centering
+      volume $64^3 \cdot 128$ \@ physical $M_\pi$
       \includegraphics[height=13.5cm,page=2]{data/tmLQCD_performance/quda_speedup}\\
     \end{minipage}
     \begin{minipage}{0.5\linewidth}
       \centering
+      volume $112^3 \cdot 224$ \@ physical $M_\pi$
       \includegraphics[height=13.5cm,page=1]{data/tmLQCD_performance/quda_speedup}\\
     \end{minipage}
 
     \begin{minipage}{0.5\linewidth}
       \centering
-      \textbf{Juwels Booster strong scaling $(64^3 \cdot 128)$}\\
+      Juwels Booster strong scaling $(64^3 \cdot 128)$\\
       \includegraphics[width=0.80\linewidth,page=1]{data/tmLQCD_scaling/HMC_Scaling}\\
     \end{minipage}
     \begin{minipage}{0.5\linewidth}
       \centering
-      \textbf{LUMI-G strong scaling $(112^3 \cdot 224)$}\\
+      LUMI-G strong scaling $(112^3 \cdot 224)$\\
       \includegraphics[width=0.80\linewidth,page=2]{data/tmLQCD_scaling/HMC_Scaling}\\
     \end{minipage}
     
@@ -280,20 +283,18 @@
     %	CONCLUSIONS
     %----------------------------------------------------------------------------------------
 
-    \color{SaddleBrown} % SaddleBrown color for the conclusions to make them stand out
-
-    \section*{Conclusions}
-    \color{Black} % Set the color back to DarkSlateGray for the rest of the content
+    %\color{SaddleBrown} % SaddleBrown color for the conclusions to make them stand out
+    %\section*{Conclusions}
+    %\color{Black} % Set the color back to DarkSlateGray for the rest of the content
 
     %----------------------------------------------------------------------------------------
     %	FORTHCOMING RESEARCH
     %----------------------------------------------------------------------------------------
 
-    \section*{Acknowledgments}
-
+    \subsection*{Acknowledgments}
+    \small 
     We would like to thank the QUDA developers for their tremendous work as well as the many pleasant and productive
-    interactions during this and previous efforts. We thank the ETMC for the most enjoyable collaboration. B.K. was funded
-    by HPC.NRW.
+    interactions during this and previous efforts. We thank the ETMC for the most enjoyable collaboration. 
     % for part of this work. S.B. and J.F. are supported by the H2020 project PRACE 6-IP (grant agreement No.
     % 82376) and the EuroCC project (grant agreement No. 951740).
     % We acknowledge support by the European Joint Doctorate
@@ -302,9 +303,9 @@
     % (DFG, German Research Foundation) and the NSFC through the funds provided to the Sino-German Collaborative
     % Research Center CRC 110 “Symmetries and the Emergence of Structure in QCD” (DFG Project-ID 196253076 - TRR
     % 110, NSFC Grant No. 12070131001).
-    The authors gratefully acknowledge the Gauss Centre for Supercomputing e.V.
-    (www.gauss-centre.eu) for funding this project through computing time on the GCS supercomputer JUWELS Booster
-    at the Jülich Supercomputing Centre.
+    We gratefully acknowledge the Gauss Centre for Supercomputing e.V. (www.gauss-centre.eu) for funding this project through computing time on the GCS supercomputer JUWELS Booster at the Jülich Supercomputing Centre.
+    We gratefully acknowledge the Swiss National Supercomputing Centre (CSCS) and the EuroHPC Joint Undertaking for awarding this project access to the LUMI supercomputer, owned by the EuroHPC Joint Undertaking, hosted by CSC (Finland) and the LUMI consortium through the Chronos programme under project IDs CH17-CSCS-CYP and CH21-CSCS-UNIBE as well as the EuroHPC Regular Access Mode under project ID EHPC-REG-2021R0095. 
+    Some of the simulations were performed on the Luxembourg national supercomputer MeluXina.
     % Some of the runs done for this work were carried out on the Bender GPU cluster
     % at the University of Bonn and we gratefully acknowledge support by the HRZ-HPC team.
     %----------------------------------------------------------------------------------------
