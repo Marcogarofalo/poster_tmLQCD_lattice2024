@@ -236,7 +236,7 @@
 
     \begin{tabular}{p{0.08\linewidth}p{0.2\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
     \multirow{2}{*}{$\What_\pm(\rho)$} & even-odd & \centering $\frac{1}{\What_{+}(\rho_t) \What_{-}(\rho_t)}$ & double-half mixed precision CG \\
-      & mass precon & \centering $\What_{-}(\rho_t) \frac{1}{\What_{+}(\rho_b) \What_{-}(\rho_b)} \What_{+}(\rho_t)$ & multigrid-preconditoned GCR depending on $\rho$ \\
+      & mass precon & \centering $\What_{-}(\rho_t) \frac{1}{\What_{+}(\rho_b) \What_{-}(\rho_b)} \What_{+}(\rho_t)$ & multigrid-preconditoned GCR or CG, depending on $\rho$ \\
       $\Qhat_h$ & e/o precon, non-degenerate, RHMC & \centering $\prod_{i=n_\ell}^{n_k} \frac{ \Qhat^2_h + a_{2i-1} }{ \Qhat^2_h + a_{2i} }$ & single precision multi-shift CG with double-half precision shift-by-shift refinement
     \end{tabular}
 
