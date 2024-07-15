@@ -1,6 +1,6 @@
 all: poster_tmLQCD_lattice2024.pdf abstract.pdf
 
-poster_tmLQCD_lattice2024.pdf: poster_tmLQCD_lattice2024.tex commands.tex Makefile figures/*.pdf data/*/*pdf
+poster_tmLQCD_lattice2024.pdf: poster_tmLQCD_lattice2024.tex commands.tex sample.bib Makefile figures/*.pdf data/*/*pdf
 	latexmk -shell-escape -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make $<
 
 abstract.pdf: abstract.md
@@ -11,6 +11,4 @@ clean:
 
 distclean:
 	latexmk -f -CA
-	rm -f $(addsuffix .pdf,$(NAMES))
-	rm -f $(addsuffix .nav,$(NAMES))
-	rm -f $(addsuffix .snm,$(NAMES))
+	rm -f poster_tmLQCD_lattice2024.pdf abstract.pdf *bbl
