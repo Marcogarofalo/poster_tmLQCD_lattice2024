@@ -16,7 +16,7 @@ for (l in unique(dat$volume)){
                         peff    = min(nodes) * speedup / nodes)
 
   print(ldat)
-  clr <- ifelse(unique(ldat$machine) == "Juwels Booster", "red", "darkgreen")
+  clr <- ifelse(unique(ldat$machine) == "Juwels Booster", "darkgreen", "red")
   lxpos <- ifelse(unique(ldat$machine) == "Juwels Booster", 0.2, 0.14)
 
   p <- ggplot2::ggplot(ldat, aes(x = nodes, y = speedup, 
