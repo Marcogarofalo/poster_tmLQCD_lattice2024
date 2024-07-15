@@ -113,7 +113,7 @@
 
     \color{Black} % SaddleBrown color for the introduction
     \subsection*{Introduction}
-    The $Nf =2+1+1$ path integral for twisted mass Wilson clover fermions \cite{Frezzotti:2003ni,Frezzotti:2004wz,Sheikholeslami:1985ij} is
+    The $N_f =2+1+1$ path integral for twisted mass Wilson clover fermions \cite{Frezzotti:2003ni,Frezzotti:2004wz,Sheikholeslami:1985ij} is
     \begin{equation*}
       Z= \int \mathcal{D}U \mathcal{D}\chi \mathcal{D}\bar\chi \,e^{-S_\mathrm{gauge}-\bar \chi D_\ell\chi - \bar \chi D_h \chi } \,,
     \end{equation*}
@@ -124,7 +124,7 @@
         D_h = (\Dsw[U] + m_0)\ 1_f + i\bar\mu\gamma_5\tau^3 - \bar\epsilon \tau^1
     \end{equation*}
     where $\Dsw$ is the Wilson clover operator while $m_0$, $\mu_\ell$, $\mubar$ and $\epsbar$ are the various untwisted and twisted mass parameters.
-    We employ Hasenbusch mass-preconditioning \cite{Hasenbusch:2001ne} to split the light quark determinant and rational HMC \cite{Clark:2006fx} with split partial fractions the non-degenerate one. Even-odd preconditioning is used throughout.
+    We employ Hasenbusch mass-preconditioning \cite{Hasenbusch:2001ne} to split the light quark determinant and rational HMC \cite{Clark:2006fx} with split partial fractions in the non-degenerate one. Even-odd preconditioning is used throughout.
 
     % The various inversions are performed using the most appropriate solver for each monomial.
     % \vspace{1cm}
@@ -232,7 +232,7 @@
     \end{minipage}
 
     \subsection*{Algorithmic choices for the MD Hamiltonian}
-    \noindent The molecular dynamics Hamiltonian is decomposed into monomials which are integrated on different time scales according to their contribution to the force using a second-order minimal norm integrator, including a force-gradient term for large volumes, 2MN(FG). The inversions are performed using the most appropriate solver for each monomial.
+    \noindent The molecular dynamics Hamiltonian is decomposed into monomials integrated on different time scales according to their contribution to the force using a second-order minimal norm integrator, including a force-gradient term for large volumes, 2MN(FG). The inversions are performed using the most appropriate solver for each monomial.
     \vspace{0.5cm}
 
     \begin{tabular}{p{0.08\linewidth}p{0.2\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
@@ -246,7 +246,8 @@
     %----------------------------------------------------------------------------------------
     \subsection*{tmLQCD + QUDA}
 
-    An efficient usage of GPUs is achieved in tmLQCD via the QUDA library~\cite{Clark:2009wm,Babich:2011np}. As first step in interfacing tmLQCD to QUDA \cite{Kostrzewa:2022hsv} the most expensive part of the HMC, i.e. the inversion of the various Dirac operators and the gauge force were offloaded. In the last year we further offloaded all computations of the fermionic force. In this way, tmLQCD can reach GPU utilizations in excess of 70\% and even up to 90\% depending on the number of available CPU cores per GPU.
+    Efficient usage of GPUs is achieved in tmLQCD via the QUDA library~\cite{Clark:2009wm,Babich:2011np}. As a first step in interfacing tmLQCD to QUDA \cite{Kostrzewa:2022hsv}
+    we offloaded the most expensive part of the HMC, i.e. the inversion of the various Dirac operators and the gauge force computation. In the last year, we further offloaded all computations of the fermionic force. In this way, tmLQCD can reach GPU utilizations over 70\% and even up to 90\% depending on the number of available CPU cores per GPU.
 
     \begin{center}
       \textbf{real-time speedup through increased GPU offloading}\\
