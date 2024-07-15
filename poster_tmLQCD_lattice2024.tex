@@ -240,7 +240,7 @@
     \begin{tabular}{p{0.3\linewidth}p{0.7\linewidth}}
       \centering $\frac{1}{\What_{+}(\rho_t) \What_{-}(\rho_t)}$ & $N_f=2$ determinant $\rightarrow$ double-half mixed precision CG \\[1cm]
     \centering $\What_{-}(\rho_t) \frac{1}{\What_{+}(\rho_b) \What_{-}(\rho_b)} \What_{+}(\rho_t)$ & $N_f=2$ determinant ratios $\rightarrow$ multigrid-preconditoned GCR or double-half mixed precision CG, depending on $\rho$ \\
-    \centering $\prod_{i=n_\ell}^{n_k} \frac{ \Qhat^2_h + a_{2i-1} }{ \Qhat^2_h + a_{2i} }$ & $1+1$ non-degenerate $\rightarrow$ RHMC, single precision multi-shift CG with double-half precision shift-by-shift refinement
+    \centering $\prod_{i=n_\ell}^{n_k} \frac{ \Qhat^2_h + a_{2i-1} }{ \Qhat^2_h + a_{2i} }$ & $1+1$ non-degenerate determinant $\rightarrow$ RHMC, single precision multi-shift CG with double-half precision shift-by-shift refinement
     \end{tabular}
 
     %----------------------------------------------------------------------------------------
