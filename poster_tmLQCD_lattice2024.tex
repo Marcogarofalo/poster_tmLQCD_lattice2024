@@ -37,6 +37,7 @@
 \usepackage[font=small,labelfont=bf]{caption} % Required for specifying captions to tables and figures
 \usepackage{amsfonts, amsmath, amsthm, amssymb} % For math fonts, symbols and environments
 \usepackage{wrapfig} % Allows wrapping text around tables and figures
+\usepackage{mathtools}
 
 \usepackage{titlesec}
 \titleformat{\section}[block]{\Large\bfseries\filcenter}{}{1em}{}
@@ -80,7 +81,7 @@
     \large $^{(d)}$ Dipartimento di Fisica and INFN, Universit\`a di Roma ``Tor Vergata", I-00133 Roma, Italy\\
     \large $^{(e)}$ Helmholtz-Institut f{\"u}r Strahlen- und Kernphysik (Theorie), University of Bonn, 53115 Bonn, Germany\\
     \large $^{(f)}$ High Performance Computing and Analytics Lab, University of Bonn, 53115 Bonn, Germany\\
-    \large $^{(g)}$ Institute for Theoretical Physics, Albert Einstein Center for Fundamental Physics, University of Bern, CH-3012 Bern, Switzerland\\
+    \large $^{(g)}$ Institute for Theoretical Physics, A.~Einstein Center for Fundamental Physics, University of Bern, CH-3012 Bern, Switzerland\\
 \end{minipage}
 %
 \begin{minipage}[b]{0.26\linewidth}
@@ -119,9 +120,11 @@
     \end{equation*}
     where $D_\ell$ is the Dirac operator for a doublet of light mass-degenerate quarks and $D_h$ is the Dirac operator for a non-degenerate doublet corresponding to the strange and charm contributon:
     \begin{equation*}
-        \label{eq:eosw0}
-        D_\ell = (\Dsw[U] + m_0)\ 1_f + i \mu_\ell\gamma_5\tau^3\, ,\quad\quad
-        D_h = (\Dsw[U] + m_0)\ 1_f + i\bar\mu\gamma_5\tau^3 - \bar\epsilon \tau^1
+        D_\ell = (\Dsw[U] + m_0)\ 1_f + i \mu_\ell\gamma_5\tau^3_f\, ,\quad\quad
+        D_h = (\Dsw[U] + m_0)\ 1_f + i\bar\mu\gamma_5\tau^3_f - \bar\epsilon \tau^1_f
+    \end{equation*}
+    \begin{equation*}
+        Q = \gamma_5 D \underset{\text{e/o precon}}{\rightarrow} \hat{Q} \underset{\text{Hasenbusch}}{\rightarrow} \hat{W}(\pm\rho) = \hat{Q} \pm i\rho
     \end{equation*}
     where $\Dsw$ is the Wilson clover operator while $m_0$, $\mu_\ell$, $\mubar$ and $\epsbar$ are the various untwisted and twisted mass parameters.
     We employ Hasenbusch mass-preconditioning \cite{Hasenbusch:2001ne} to split the light quark determinant and rational HMC \cite{Clark:2006fx} with split partial fractions in the non-degenerate one. Even-odd preconditioning is used throughout.
@@ -193,8 +196,7 @@
     \end{center}
     \begin{itemize}
       \item 7 approximate pion mass values: 135 MeV $\leq M_\pi \leq $ 340 MeV
-      \item 6 lattice spacings: 0.049 fm $\leq a \leq$ 0.091 fm
-      \item 5 lattice spacings close to or at the physical pion mass
+      \item 6 lattice spacings: 0.049 fm $\leq a \leq$ 0.091 fm, 5 at or close to the physical pion mass
       \item multiple volumes at many pion mass points: 2.0 fm $\leq L \leq$ 7.7 fm
     \end{itemize}
     \subsection*{Ensembles close to the physical point}
@@ -215,7 +217,7 @@
     \subsection*{Statistical properties close to the physical pion mass}
     \begin{minipage}{0.48\linewidth}
         \centering
-        \textbf{\hspace{3cm}Gradient-flowed energy density}\\
+        \hspace{2.2cm}\textbf{Gradient flow observables}\\
         \includegraphics[width=\linewidth,page=1]{data/gf_observables/gf_observables_md_histories}
         \begin{itemize}
             \item Long $\tau_\mathrm{int}$ in $w_0/a$ at coarse lattice spacing, not negligible at fine lattice spacing.
@@ -235,10 +237,10 @@
     \noindent The molecular dynamics Hamiltonian is decomposed into monomials integrated on different time scales according to their contribution to the force using a second-order minimal norm integrator, including a force-gradient term for large volumes, 2MN(FG). The inversions are performed using the most appropriate solver for each monomial.
     \vspace{0.5cm}
 
-    \begin{tabular}{p{0.08\linewidth}p{0.2\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
-    \multirow{2}{*}{$\What_\pm(\rho)$} & even-odd & \centering $\frac{1}{\What_{+}(\rho_t) \What_{-}(\rho_t)}$ & double-half mixed precision CG \\
-      & mass precon & \centering $\What_{-}(\rho_t) \frac{1}{\What_{+}(\rho_b) \What_{-}(\rho_b)} \What_{+}(\rho_t)$ & multigrid-preconditoned GCR or CG, depending on $\rho$ \\
-      $\Qhat_h$ & e/o precon, non-degenerate, RHMC & \centering $\prod_{i=n_\ell}^{n_k} \frac{ \Qhat^2_h + a_{2i-1} }{ \Qhat^2_h + a_{2i} }$ & single precision multi-shift CG with double-half precision shift-by-shift refinement
+    \begin{tabular}{p{0.3\linewidth}p{0.7\linewidth}}
+      \centering $\frac{1}{\What_{+}(\rho_t) \What_{-}(\rho_t)}$ & $N_f=2$ determinant $\rightarrow$ double-half mixed precision CG \\[1cm]
+    \centering $\What_{-}(\rho_t) \frac{1}{\What_{+}(\rho_b) \What_{-}(\rho_b)} \What_{+}(\rho_t)$ & $N_f=2$ determinant ratios $\rightarrow$ multigrid-preconditoned GCR or double-half mixed precision CG, depending on $\rho$ \\
+    \centering $\prod_{i=n_\ell}^{n_k} \frac{ \Qhat^2_h + a_{2i-1} }{ \Qhat^2_h + a_{2i} }$ & $1+1$ non-degenerate determinant $\rightarrow$ RHMC, single precision multi-shift CG with double-half precision shift-by-shift refinement
     \end{tabular}
 
     %----------------------------------------------------------------------------------------
@@ -295,16 +297,14 @@
     \small 
     We would like to thank the QUDA developers for their tremendous work as well as the many pleasant and productive
     interactions during this and previous efforts. We thank the ETMC for the most enjoyable collaboration. 
-    % for part of this work. S.B. and J.F. are supported by the H2020 project PRACE 6-IP (grant agreement No.
-    % 82376) and the EuroCC project (grant agreement No. 951740).
-    % We acknowledge support by the European Joint Doctorate
-    % program STIMULATE grant agreement No. 765048.
-    % This work is supported by the Deutsche Forschungsgemeinschaft
-    % (DFG, German Research Foundation) and the NSFC through the funds provided to the Sino-German Collaborative
-    % Research Center CRC 110 “Symmetries and the Emergence of Structure in QCD” (DFG Project-ID 196253076 - TRR
-    % 110, NSFC Grant No. 12070131001).
-    We gratefully acknowledge the Gauss Centre for Supercomputing e.V. (www.gauss-centre.eu) for funding this project through computing time on the GCS supercomputer JUWELS Booster at the Jülich Supercomputing Centre.
-    We gratefully acknowledge the Swiss National Supercomputing Centre (CSCS) and the EuroHPC Joint Undertaking for awarding this project access to the LUMI supercomputer, owned by the EuroHPC Joint Undertaking, hosted by CSC (Finland) and the LUMI consortium through the Chronos programme under project IDs CH17-CSCS-CYP and CH21-CSCS-UNIBE as well as the EuroHPC Regular Access Mode under project ID EHPC-REG-2021R0095. 
+    For part of this work. S.B. and J.F. were supported by the H2020 project PRACE 6-IP (grant agreement No. 82376) and the EuroCC project (grant agreement No. 951740).
+    We acknowledge support by the European Joint Doctorate program STIMULATE grant agreement No. 765048.
+    This work was supported by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) and the NSFC through the funds provided to the Sino-German Collaborative Research Center CRC 110 “Symmetries and the Emergence of Structure in QCD” (DFG Project-ID 196253076 - TRR 110, NSFC Grant No. 12070131001).
+    We acknowledge support from projects NextQCD (EXCELLENCE/0918/0129) and "3D-Nucleon" (EXCELLENCE/0421/0043), co-funded by the European Regional Development Fund and the Republic of Cyprus through the Research and Innovation Foundation. 
+    We further gratefully acknowledge: The Gauss Centre for Supercomputing e.V. for funding this project through computing time on the GCS supercomputers SuperMUC and SuperMUC-NG at Leibniz Supercomputing Center as well as JUWELS Booster at the Jülich Supercomputing Centre.
+    PRACE for awarding access to HAWK at HLRS within the project with Id Acid 4886. 
+    The Swiss National Supercomputing Centre (CSCS) and the EuroHPC Joint Undertaking for awarding access to the LUMI supercomputer, owned by the EuroHPC JU, hosted by CSC and the LUMI consortium through the Chronos programme under project IDs CH17-CSCS-CYP and CH21-CSCS-UNIBE as well as EuroHPC under project ID EHPC-REG-2021R0095.
+    The Texas Advanced Computing Center (TACC) at The University of Texas at Austin for providing HPC resources on Frontera (Project ID PHY21001).
     Some of the simulations were performed on the Luxembourg national supercomputer MeluXina.
     % Some of the runs done for this work were carried out on the Bender GPU cluster
     % at the University of Bonn and we gratefully acknowledge support by the HRZ-HPC team.
