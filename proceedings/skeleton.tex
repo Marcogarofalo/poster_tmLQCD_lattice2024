@@ -47,7 +47,7 @@
 
 \usepackage[font={small,it},labelfont=bf,tableposition=top]{caption}
 
-\input{commands.tex}
+\input{../commands.tex}
 
 \title{Status of the ETMC ensemble generation effort}
 %% \ShortTitle{Short Title for header}
@@ -107,37 +107,23 @@ Algorithmic improvements and \ldots
 The non-perturbative study of Quantum Chromodynamics through Lattice QCD simulations at physical quark masses with well-controlled continuum and infinite volume extrapolations 
 
 
-\begin{figure}
-  \includegraphics[width=0.5\linewidth,page=2]{plots/quda_speedup}
-  \includegraphics[width=0.5\linewidth,page=1]{plots/quda_speedup}
-  \caption{\textbf{Left:} Time per unit length trajectory of tmLQCD + QUDA (green) for a $64^3 \cdot 128$ ensemble at the physical point compared to the machine it was originally generated on (purple) using tmLQCD + DD-$\alpha$AMG~\cite{Alexandrou:2016izb}. The different speedups correspond to increasing levels of QUDA offloading. \textbf{Right:} The same kind of comparison between tmLQCD + QUDA and tmLQCD + DD-$\alpha$AMG + QPhiX~\cite{QPhiX,Schrock:2015gik,QPhiX-github} running a $112^3 \cdot 224$ ensemble at the physical point on LUMI-G and Frontera, respectively.}
-  \label{fig:quda_speedup}
-\end{figure}
 
 \section{Lattice Setup}
-    The $N_f =2+1+1$ path integral for twisted mass Wilson clover fermions \cite{Frezzotti:2003ni,Frezzotti:2004wz,Sheikholeslami:1985ij} is
-    \begin{equation*}
+    The $N_f =2+1+1$ path integral for twisted-mass Wilson clover fermions \cite{Frezzotti:2003ni,Frezzotti:2004wz,Sheikholeslami:1985ij} is
+    \begin{equation}
       Z= \int \mathcal{D}U \mathcal{D}\chi \mathcal{D}\bar\chi \,e^{-S_\mathrm{gauge}-\bar \chi D_\ell\chi - \bar \chi D_h \chi } \,,
-    \end{equation*}
-    where $D_\ell$ is the Dirac operator for a doublet of light mass-degenerate quarks and $D_h$ is the Dirac operator for a non-degenerate doublet corresponding to the strange and charm contributon:
+    \end{equation}
+    where $D_\ell$ is the Dirac operator for a doublet of light mass-degenerate quarks and $D_h$ is the Dirac operator for a non-degenerate doublet corresponding to the strange and charm contribution:
     \begin{equation*}
         D_\ell = (\Dsw[U] + m_0)\ 1_f + i \mu_\ell\gamma_5\tau^3_f\, ,\quad\quad
         D_h = (\Dsw[U] + m_0)\ 1_f + i\bar\mu\gamma_5\tau^3_f - \bar\epsilon \tau^1_f
     \end{equation*}
-    \begin{equation*}
-        Q = \gamma_5 D \underset{\text{e/o precon}}{\rightarrow} \hat{Q} \underset{\text{Hasenbusch}}{\rightarrow} \hat{W}(\pm\rho) = \hat{Q} \pm i\rho
-    \end{equation*}
-    where $\Dsw$ is the Wilson clover operator while $m_0$, $\mu_\ell$, $\mubar$ and $\epsbar$ are the various untwisted and twisted mass parameters.
-    We employ Hasenbusch mass-preconditioning \cite{Hasenbusch:2001ne} to split the light quark determinant and rational HMC \cite{Clark:2006fx} with split partial fractions in the non-degenerate one. Even-odd preconditioning is used throughout.
+    % \begin{equation*}
+    %     Q = \gamma_5 D \underset{\text{e/o precon}}{\rightarrow} \hat{Q} \underset{\text{Hasenbusch}}{\rightarrow} \hat{W}(\pm\rho) = \hat{Q} \pm i\rho
+    % \end{equation*}
+    where $\Dsw$ is the Wilson clover operator while $m_0$, $\mu_\ell$, $\mubar$ and $\epsbar$ are the various untwisted and twisted mass parameters. The matrices $\tau_f^i$ with $i=1,2,3$ are the pauli matrices acting on the flavour space and we use a representation of the Dirca matric such that  $\gamma_5=\text{diag}\{+1,+1,-1,-1\}$.
 
-The various inversions are performed using the most appropriate solver for each monomial.
-\vspace{1cm}
-\begin{tabular}{p{0.3\linewidth}p{0.7\linewidth}}
-  \centering $\frac{1}{\What_{+}(\rho_t) \What_{-}(\rho_t)}$ & double-half mixed-precision CG \\
-  \centering $\What_{-}(\rho_t) \frac{1}{\What_{+}(\rho_b) \What_{-}(\rho_b)} \What_{+}(\rho_t)$ & double-half mixed precision CG or multigrid-preconditoned GCR depending on $\rho_b$ \\
-  \centering $\prod_{i=n_\ell}^{n_k} \frac{ \Qhat^2_h + a_{2i-1} }{ \Qhat^2_h + a_{2i} }$ & single precision multi-shift CG with double-half precision shift-by-shift refinement 
-\end{tabular}
-Integrating fermion variables and using Even/odd Preconditioning
+Integrating fermion variables and using Even/odd Preconditioning we get
 \begin{flalign*}
     Z= \int DU  \,e^{-S_{gauge} }\det{\left(M_{ee}^+M_{ee}^-\right)}
     \det{(\hat Q_{+}\hat Q_{-})}
@@ -145,51 +131,91 @@ Integrating fermion variables and using Even/odd Preconditioning
 \end{flalign*}
 with the degenerate operator written in terms of the even/odd part of the operator
 \begin{flalign*}
-    \hQpm = \gamma_5 \left[  \Moo   - \Moe \Mee^{-1} \Meo \right] \,,\quad \quad
-    \Mee =1 + 2\kappa c_{SW} T_{ee} + i\tilde\mu\gamma_5 \,, \quad \quad M_{deg} =\gamma_5 \begin{pmatrix}
-                                                                                               M_{ee} & M_{eo} \\
-                                                                                               M_{oe} & M_{oo} \\
-                                                                                           \end{pmatrix} &  &
+    &\hQpm = \gamma_5 \left[  \Moo^{\pm}   - \Moe (\Mee^{\pm})^{-1} \Meo \right] 
+   % \Mee^{\pm} =1 + 2\kappa c_{SW} T_{ee} \pm i\tilde\mu\gamma_5 \,,& \\  
+    \,,\quad \quad
+       M^{\pm} = \begin{pmatrix}
+        M_{ee}^{\pm} & M_{eo} \\
+        M_{oe} & M_{oo}^{\pm} \\
+          \end{pmatrix}
+          \,,\quad \quad
+    D_{\ell} = \begin{pmatrix}
+      M^+ & 0 \\
+      0 & M^- \\
+      \end{pmatrix}\,. &
 \end{flalign*}
+Notice that $\gamma_5$ in $\hQpm$ definition is non changing the value of $ \det{(\hat Q_{+}\hat Q_{-})}=\det{(\gamma_5\hat Q_{+}\gamma_5\hat Q_{-})}$
 while the non-degenerate operator is a two-flavour operators
 \begin{flalign*}
-    \hat	Q_h = \gamma_5 \left[ ( \Moo^h + i \mu_\sigma \gamma_5 \tau^3 - \mu_\delta \tau^1 ) - \Moe^h (\Mee^h + i \mu_\sigma \gamma_5 \tau^3 - \mu_\delta \tau^1 )^{-1} \Meo^h \right] &  &
+    &\hat	Q_h = \gamma_5 \left[ ( \Moo^h  ) - \Moe^h (\Mee^h  )^{-1} \Meo^h \right] \tau_1\,,\quad\quad
+    &D_{h} = \begin{pmatrix}
+      M_{ee}^{h} & M_{eo}^h \\
+      M_{oe}^h & M_{oo}^{h} \\
+        \end{pmatrix}\,. &&
 \end{flalign*}
+Also here we used that we can multiply by $\gamma_5$ and $\tau_1$ in the 
+determinant leaving it unchanged  $\det{(\hat Q_h)}= \det{(\gamma_5\hat Q_h\tau_1)}$
 
-Applaying Hasenbusch trick \cite{Hasenbusch:2001ne} for the degenerate and Rational HMC \cite{Clark:2006fx} for the non degenerate operator
+Applaying Hasenbusch trick \cite{Hasenbusch:2001ne} for the degenerate and Rational HMC \cite{Clark:2006fx} for the non-degenerate operator
 we get
 \begin{multline*}
     Z= \int DU  \,e^{-S_{gauge} }\det{\left(M_{ee}^+M_{ee}^-\right)}
-    \det{(\hat W_{+}\hat W_{-})}	\det{(\hat W_{+}^{-1}\hat Q_+\hat Q_-\hat W_{-}^{-1})}...\,\\
+    \det{(\hat W_{m+}\hat W_{m-})}\det{(\hat W_{m+}^{-1}\hat W_{(m-1)+}\hat W_{(m-1)-}\hat W_{m-}^{-1})} ...	\det{(\hat W_{1+}^{-1}\hat Q_+\hat Q_-\hat W_{1-}^{-1})}
+    \,\\
     \det{(M_{ee}^{h})}
-    {\det{(  r_1(\hat Q_h) )}\det{(  r_2(\hat Q_h) )}...\,\det{(|\hat Q_h|{\cal R}(\hat Q_h)}}
+    {\det{(  r_1^{-1}(\hat Q_h) )}\det{(  r_2^{-1}(\hat Q_h) )}...\,\det{(|\hat Q_h|{\cal R}(\hat Q_h)}}
 \end{multline*}
 with the operator
-$\hWpm(\rho) = \hQpm \pm i \rho$ s.t. $\hWp(\rho) \hWm(\rho) = \hQp \hQm +\rho^2$ such that the clover inverse $\rho$-independent.
-The rational approximation is
+$W_{i\pm} = \hQpm \pm i \rho_i$ such that $W_{i+} W_{i-} = \hQp \hQm +\rho_i^2$. This ensures that the clover inverse remains independent of $\rho$.
+The rational approximation is given by
 \begin{equation*}
-    \mathcal{R}(\hat Q_h^2) = \prod_{i=1}^{N} \frac{\hat Q^2_h + a_{2i-1}}{\hat Q^2_h + a_{2i}}=\prod_{i=1}^{N} r_i(\hat Q_h) \approx \frac{1}{\sqrt{\hat Q_h^2}}
+    \mathcal{R}(\hat Q_h^2) = \prod_{i=1}^{N} \frac{\hat Q^2_h + a_{2i-1}}{\hat Q^2_h + a_{2i}}=\prod_{i=1}^{N} r_i(\hat Q_h) \approx \frac{1}{\sqrt{\hat Q_h^2}}\,,
 \end{equation*}
 with $N \approx 10$, with $\mathcal{R}$ split across 2-3 monomials $r_i(\hat Q_h)$ on 2-3 timescales (usually 3).
 Exponentiating the determinants we get the action used in the HMC \cite{Duane:1987de}
 \begin{flalign*}
-    Z= \int DU D\phi D\phi^*  \,e^{-S_{gauge} } e^{-S_{det}}
+    &Z= \int DU D\phi D\phi^\dagger \,e^{-S_{gauge} } e^{-S_{det}}
     e^{-S_{PF}}  e^{-S_{PF}^1}...\,
     {e^{-S_{det}^h}}
     {e^{-S_{det}^h}}
     e^{-S_{PF}^{1h}} e^{-S_{PF}^{2h}}...\,
-    e^{-S_{corr}}\,.
+    e^{-S_{corr}}\,,&&\\
+    &S_{det} = \tr[\log(M_{ee}^+) -\log(M_{ee}^-)]\,,&&\\
+    &S_{PF} = \phi_0^\dagger (\hat W_{m+}\hat W_{m-})^{-1} \phi_0\,,&&\\
+    &S_{PF}^i = \phi_i^\dagger (\hat W_{m+}^{-1}\hat W_{(m-i)+}\hat W_{(m-i)-}\hat W_{m-}^{-1})^{-1} \phi_i \,, \quad \quad 
+    S_{PF}^m = \phi_m^\dagger (\hat W_{1+}^{-1}\hat Q_{+}\hat Q_{-}\hat W_{1-}^{-1})^{-1} \phi_m \,,&&\\
+    &S_{det}^h = \tr[\log(M_{ee}^h)]\,,&&\\
+    &S_{PF}^{1h} = \phi_{1h}^{\dagger}  r_1(\hat Q_h)...r_{n_1}(\hat Q_h) \phi_{1h} 
+    \,, \quad\quad S_{PF}^{ih} = \phi_{ih}^\dagger  r_{n_{i-1}+1}(\hat Q_h)...r_{n_i}(\hat Q_h) \phi_{ih} \,,\quad\quad n_1+n_2+...=N&&\\
+    &S_{corr}=  \phi_{corr}^\dagger(|\hat Q_h|{\cal R}(\hat Q_h))^{-1} \phi_{corr}\,.&&
 \end{flalign*}
 The corresponding equation of motion to be integrated in the HMC are
 \begin{align*}
     \partial_t U   & =\Pi                \\
     \partial_t \Pi & =-\delta S_{gauge}-
     \delta S_{det} - \delta S_{PF} - \delta S_{PF}^1 -...-
-    \delta S^h_{det} -\delta S^{1h}_{PF} - \delta S^{2h}_{PF}-...-
-    \delta S_{corr}\,.
+    \delta S^h_{det} -\delta S^{1h}_{PF} - \delta S^{2h}_{PF}-...\,.
 \end{align*}
+where  the contribution from $S_{corr}$ is not included in the force, but only in the \textit{accept/reject} step of the HMC.
+The various inversions required in the heathbath of the pseudofermions, in the foce computation and in the \textit{accept/reject} step are performed using the most appropriate solver for each monomial.
+\vspace{1cm}
+\begin{tabular}{p{0.3\linewidth}p{0.7\linewidth}}
+  \centering $(\hat W_{m+}\hat W_{m-})^{-1}$ & double-half mixed-precision CG \\
+  \centering $(\hat W_{m+}^{-1}\hat W_{(m-i)+}\hat W_{(m-i)-}\hat W_{m-}^{-1})^{-1}$ & double-half mixed precision CG or multigrid-preconditoned GCR depending on $\rho_b$ \\
+  \centering $\prod_{i=n_\ell}^{n_k} \frac{ \Qhat^2_h + a_{2i-1} }{ \Qhat^2_h + a_{2i} }$ & single precision multi-shift CG with double-half precision shift-by-shift refinement 
+\end{tabular}
+   
 
 \section{Overview of Current Ensembles}
+% ETMC has produced the ensembles shown in Table~\ref{tab:ens} using the 
+% $N_f=2+1+1$
+%  twisted-mass Wilson clover formulation. The bare parameters of these ensembles are provided in Table~\ref{tab:ens} while in Figure~\ref{fig:ensemble_overview} and \ref{fig:ensembles_phys_point} there is an overview of the value of the pion mass $M_\pi$ and the volume.
+% Additional information regarding the gradient flow observables is reported in the left panel of Figure~\ref{fig:w0_Q} while the right panel shows the history of the topological charge which is not frozen 
+% at the smallest lattice spacing of $a\sim0.049$ fm.
+
+ETMC has generated the ensembles listed in Table~\ref{tab:ens} using the \(N_f = 2+1+1\) twisted-mass Wilson clover formulation. Table~\ref{tab:ens} presents the bare parameters of these ensembles, while Figures~\ref{fig:ensemble_overview} and \ref{fig:ensembles_phys_point} provide an overview of the pion mass \(M_\pi\) and lattice volume.  
+
+Further details on gradient flow observables are shown in the left panel of Figure~\ref{fig:w0_Q}, whereas the right panel illustrates the evolution of the topological charge, demonstrating that it remains unfrozen even at the smallest lattice spacing of \(a \sim 0.049\) fm.
 
 \begin{table}
   \resizebox{\linewidth}{!}{% 
@@ -220,6 +246,7 @@ The corresponding equation of motion to be integrated in the HMC are
     \end{tabular}%
   }
   \caption{Algorithmic and bare action parameters of the ETMC $N_f=2+1+1$ Wilson clover twisted mass ensembles. Lattice spacing and pion mass values are indicative. The trajectory length in molecular dynamics units is given by $\tau$. The trajectory counts $N_\textrm{traj}$ correspond to the state at the time of writing and might have increased since. Dashes (--) indicate that the value from the row above is implied.}
+  \label{tab:ens}
 \end{table}
 
 \begin{figure}
@@ -235,19 +262,29 @@ The corresponding equation of motion to be integrated in the HMC are
   \label{fig:ensembles_phys_point}
 \end{SCfigure}
 
-\begin{SCfigure}
-  \includegraphics[width=\linewidth]{plots/amu_s_W_a4}
-\end{SCfigure}
+% \begin{SCfigure}
+%   \includegraphics[width=\linewidth]{plots/amu_s_W_a4}
+% \end{SCfigure}
 
 \begin{figure}
   \includegraphics[width=0.49\linewidth,page=1]{../data/gf_observables/gf_observables_md_histories}
   \hfill
   \includegraphics[width=0.49\linewidth,page=2]{../data/gf_observables/gf_observables_md_histories}
   \caption{\textbf{Left:} Molecular dynamics histories for different ensembles close to or ar the physical point of the flow-time derivative of the gradient-flowed energy density, interpolated to the flow time where the ensemble average $t \frac{t}{dt} \lbrace t^2 \langle E(t) \rangle \rbrace = W(t)|_{t = w_0^2} = 0.3$. Only the first 2200 unit-length molecular dynamics units are shown in the histories whereas the histograms in the right sub-panels represent the full data sets. \textbf{Right:} Similar histories for the gradient-flowed topological charge in the clover definition evaluated at a flow time $t = w_0^2$. Lattice spacing values are indicative.}
+  \label{fig:w0_Q}
 \end{figure}
 
 \section{Computational Setup}
 
+Efficient usage of GPUs is achieved in tmLQCD via the QUDA library~\cite{Clark:2009wm,Babich:2011np}. As a first step in interfacing tmLQCD to QUDA \cite{Kostrzewa:2022hsv}  we offloaded the most expensive part of the HMC, i.e. the inversion of the various Dirac operators and the gauge force computation. In the last year, we further offloaded all computations of the fermionic force. In this way, tmLQCD can reach GPU utilizations over 70\% and even up to 90\% depending on the number of available CPU cores per GPU.
+The evolution of the performance of this tmLQCD + QUDA setup is shown in the left panel of Figure~\ref{fig:quda_speedup}
+
+\begin{figure}
+  \includegraphics[width=0.5\linewidth,page=2]{plots/quda_speedup}
+  \includegraphics[width=0.5\linewidth,page=1]{plots/quda_speedup}
+  \caption{\textbf{Left:} Time per unit length trajectory of tmLQCD + QUDA (green) for a $64^3 \cdot 128$ ensemble at the physical point compared to the machine it was originally generated on (purple) using tmLQCD + DD-$\alpha$AMG~\cite{Alexandrou:2016izb}. The different speedups correspond to increasing levels of QUDA offloading. \textbf{Right:} The same kind of comparison between tmLQCD + QUDA and tmLQCD + DD-$\alpha$AMG + QPhiX~\cite{QPhiX,Schrock:2015gik,QPhiX-github} running a $112^3 \cdot 224$ ensemble at the physical point on LUMI-G and Frontera, respectively.}
+  \label{fig:quda_speedup}
+\end{figure}
 
 \section{Acknowledgements}
 {
