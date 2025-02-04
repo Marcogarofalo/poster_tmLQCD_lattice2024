@@ -114,23 +114,23 @@ The $N_f =2+1+1$ path integral for twisted-mass Wilson clover fermions \cite{Fre
   Z= \int \mathcal{D}U \mathcal{D}\chi \mathcal{D}\bar\chi \,e^{-S_\mathrm{gauge}-\bar \chi D_\ell\chi - \bar \chi D_h \chi } \,,
 \end{equation}
 where $D_\ell$ is the Dirac operator for a doublet of light mass-degenerate quarks and $D_h$ is the Dirac operator for a non-degenerate doublet corresponding to the strange and charm contribution:
-\begin{equation*}
+\begin{equation}
   D_\ell = (\Dsw[U] + m_0)\ 1_f + i \mu_\ell\gamma_5\tau^3_f\, ,\quad\quad
   D_h = (\Dsw[U] + m_0)\ 1_f + i\bar\mu\gamma_5\tau^3_f - \bar\epsilon \tau^1_f
-\end{equation*}
-% \begin{equation*}
+\end{equation}
+% \begin{equation}
 %     Q = \gamma_5 D \underset{\text{e/o precon}}{\rightarrow} \hat{Q} \underset{\text{Hasenbusch}}{\rightarrow} \hat{W}(\pm\rho) = \hat{Q} \pm i\rho
-% \end{equation*}
-where $\Dsw$ is the Wilson clover operator while $m_0$, $\mu_\ell$, $\mubar$ and $\epsbar$ are the various untwisted and twisted mass parameters. The matrices $\tau_f^i$ with $i=1,2,3$ are the pauli matrices acting on the flavour space and we use a representation of the Dirca matric such that  $\gamma_5=\text{diag}\{+1,+1,-1,-1\}$.
+% \end{equation}
+where $\Dsw$ is the Wilson clover operator while $m_0$, $\mu_\ell$, $\mubar$ and $\epsbar$ are the various untwisted and twisted mass parameters. The matrices $\tau_f^i$ with $i=1,2,3$ are the pauli matrices acting on the flavour space and we use a representation of the Dirca matric such that  $\gamma_5=\text{diag}\{+1,+1,-1,-1\}$. More details are given in \cite{ExtendedTwistedMass:2021qui}.
 
 Integrating fermion variables and using Even/odd Preconditioning we get
-\begin{flalign*}
+\begin{flalign}
   Z= \int DU  \,e^{-S_{gauge} }\det{\left(M_{ee}^+M_{ee}^-\right)}
   \det{(\hat Q_{+}\hat Q_{-})}
   \det{(\hat Q_h)} \det{(M_{ee}^{h})} &  &
-\end{flalign*}
+\end{flalign}
 with the degenerate operator written in terms of the even/odd part of the operator
-\begin{flalign*}
+\begin{flalign}
   \hQpm = \gamma_5 \left[  \Moo^{\pm}   - \Moe (\Mee^{\pm})^{-1} \Meo \right]
   \,,\quad \quad
   M^{\pm} = \begin{pmatrix}
@@ -142,67 +142,67 @@ with the degenerate operator written in terms of the even/odd part of the operat
                M^+ & 0   \\
                0   & M^- \\
              \end{pmatrix}\,. &  &
-\end{flalign*}
+\end{flalign}
 Notice that $\gamma_5$ in $\hQpm$ definition is non changing the value of $ \det{(\hat Q_{+}\hat Q_{-})}=\det{(\gamma_5\hat Q_{+}\gamma_5\hat Q_{-})}$
 while the non-degenerate operator is a two-flavour operators
-\begin{flalign*}
+\begin{flalign}
   \hat	Q_h = \gamma_5 \left[ ( \Moo^h  ) - \Moe^h (\Mee^h  )^{-1} \Meo^h \right] \tau_1\,,\quad\quad
    & D_{h} = \begin{pmatrix}
                M_{ee}^{h} & M_{eo}^h   \\
                M_{oe}^h   & M_{oo}^{h} \\
              \end{pmatrix}\,. &  &
-\end{flalign*}
+\end{flalign}
 Also here we used that we can multiply by $\gamma_5$ and $\tau_1$ in the
 determinant leaving it unchanged  $\det{(\hat Q_h)}= \det{(\gamma_5\hat Q_h\tau_1)}$.
 
 Applaying Hasenbusch trick \cite{Hasenbusch:2001ne} for the degenerate and Rational HMC \cite{Clark:2006fx} for the non-degenerate operator
 we get
-\begin{multline*}
+\begin{multline}
   Z= \int DU  \,e^{-S_{gauge} }\det{\left(M_{ee}^+M_{ee}^-\right)}
   \det{(\hat W_{m+}\hat W_{m-})}\det{(\hat W_{m+}^{-1}\hat W_{(m-1)+}\hat W_{(m-1)-}\hat W_{m-}^{-1})} ...	\det{(\hat W_{1+}^{-1}\hat Q_+\hat Q_-\hat W_{1-}^{-1})}
   \,\\
   \det{(M_{ee}^{h})}
   {\det{(  r_1^{-1}(\hat Q_h) )}\det{(  r_2^{-1}(\hat Q_h) )}...\,\det{(|\hat Q_h|{\cal R}(\hat Q_h)}}
-\end{multline*}
+\end{multline}
 with the operator
 $W_{i\pm} = \hQpm \pm i \rho_i$ such that $W_{i+} W_{i-} = \hQp \hQm +\rho_i^2$. This ensures that the clover inverse remains independent of $\rho$.
 The rational approximation is given by
-\begin{equation*}
+\begin{equation}
   \mathcal{R}(\hat Q_h^2) = \prod_{i=1}^{N} \frac{\hat Q^2_h + a_{2i-1}}{\hat Q^2_h + a_{2i}}=\prod_{i=1}^{N} r_i(\hat Q_h) \approx \frac{1}{\sqrt{\hat Q_h^2}}\,,
-\end{equation*}
+\end{equation}
 with $N \approx 10$, with $\mathcal{R}$ split across 2-3 monomials $r_i(\hat Q_h)$ on 2-3 timescales (usually 3).
 Exponentiating the determinants we get the action used in the HMC \cite{Duane:1987de}
-\begin{flalign*}
+\begin{flalign}
    & Z= \int DU D\phi D\phi^\dagger \,e^{-S_{gauge} } e^{-S_{det}}
   e^{-S_{PF}}  e^{-S_{PF}^1}...\,
   {e^{-S_{det}^h}}
   {e^{-S_{det}^h}}
   e^{-S_{PF}^{1h}} e^{-S_{PF}^{2h}}...\,
-  e^{-S_{corr}}\,,                                                                                                                  \\
-   & S_{det} = \tr[\log(M_{ee}^+) -\log(M_{ee}^-)]\,,                                                                               \\
-   & S_{PF} = \phi_0^\dagger (\hat W_{m+}\hat W_{m-})^{-1} \phi_0\,,                                                                \\
+  e^{-S_{corr}}\,,                                                                                                                  \\\nonumber
+   & S_{det} = \tr[\log(M_{ee}^+) -\log(M_{ee}^-)]\,,                                                                               \\\nonumber
+   & S_{PF} = \phi_0^\dagger (\hat W_{m+}\hat W_{m-})^{-1} \phi_0\,,                                                                \\\nonumber
    & S_{PF}^i = \phi_i^\dagger (\hat W_{m+}^{-1}\hat W_{(m-i)+}\hat W_{(m-i)-}\hat W_{m-}^{-1})^{-1} \phi_i \,, \quad \quad
-  S_{PF}^m = \phi_m^\dagger (\hat W_{1+}^{-1}\hat Q_{+}\hat Q_{-}\hat W_{1-}^{-1})^{-1} \phi_m \,,                                  \\
-   & S_{det}^h = \tr[\log(M_{ee}^h)]\,,                                                                                             \\
+  S_{PF}^m = \phi_m^\dagger (\hat W_{1+}^{-1}\hat Q_{+}\hat Q_{-}\hat W_{1-}^{-1})^{-1} \phi_m \,,                                  \\\nonumber
+   & S_{det}^h = \tr[\log(M_{ee}^h)]\,,                                                                                             \\\nonumber
    & S_{PF}^{1h} = \phi_{1h}^{\dagger}  r_1(\hat Q_h)...r_{n_1}(\hat Q_h) \phi_{1h}
   \,, \quad\quad S_{PF}^{ih} = \phi_{ih}^\dagger  r_{n_{i-1}+1}(\hat Q_h)...r_{n_i}(\hat Q_h) \phi_{ih} \,,\quad\quad n_1+n_2+...=N \\
    & S_{corr}=  \phi_{corr}^\dagger(|\hat Q_h|{\cal R}(\hat Q_h))^{-1} \phi_{corr}\,.
-\end{flalign*}
+\end{flalign}
 The corresponding equation of motion to be integrated in the HMC are
-\begin{align*}
+\begin{align}
   \partial_t U   & =\Pi                \\
   \partial_t \Pi & =-\delta S_{gauge}-
   \delta S_{det} - \delta S_{PF} - \delta S_{PF}^1 -...-
   \delta S^h_{det} -\delta S^{1h}_{PF} - \delta S^{2h}_{PF}-...\,.
-\end{align*}
+\end{align}
 where  the contribution from $S_{corr}$ is not included in the force, but only in the \textit{accept/reject} step of the HMC.
-The various inversions required in the heathbath of the pseudofermions, in the foce computation and in the \textit{accept/reject} step are performed using the most appropriate solver for each monomial.
-\vspace{1cm}
-\begin{tabular}{p{0.3\linewidth}p{0.7\linewidth}}
-  \centering $(\hat W_{m+}\hat W_{m-})^{-1}$                                              & double-half mixed-precision CG                                                       \\
-  \centering $(\hat W_{m+}^{-1}\hat W_{(m-i)+}\hat W_{(m-i)-}\hat W_{m-}^{-1})^{-1}$      & double-half mixed precision CG or multigrid-preconditoned GCR depending on $\rho_b$  \\
-  \centering $\prod_{i=n_\ell}^{n_k} \frac{ \Qhat^2_h + a_{2i-1} }{ \Qhat^2_h + a_{2i} }$ & single precision multi-shift CG with double-half precision shift-by-shift refinement
-\end{tabular}
+The various inversions required in the heathbath of the pseudofermions, in the force computation and in the \textit{accept/reject} step are performed using the most appropriate solver for each monomial:
+\begin{itemize}
+  \item $(\hat W_{m+}\hat W_{m-})^{-1}$  is computed with a double-half mixed-precision CG
+  \item   $(\hat W_{m+}^{-1}\hat W_{(m-i)+}\hat W_{(m-i)-}\hat W_{m-}^{-1})^{-1}$   is computed with a    double-half mixed precision CG or multigrid-preconditoned GCR depending on $\rho_b$
+  \item  $\prod_{i=n_\ell}^{n_k} \frac{ \Qhat^2_h + a_{2i-1} }{ \Qhat^2_h + a_{2i} }$ is computed with a single precision multi-shift CG with a refinement shift-by-shift in double-half precision 
+\end{itemize}
+
 
 
 \section{Overview of Current Ensembles}
