@@ -103,9 +103,14 @@ Liverpool, UK\\}
 
 
 \section{Introduction}
-Algorithmic improvements and \ldots
-The non-perturbative study of Quantum Chromodynamics through Lattice QCD simulations at physical quark masses with well-controlled continuum and infinite volume extrapolations
+% Algorithmic improvements and \ldots
+% The non-perturbative study of Quantum Chromodynamics through Lattice QCD simulations at physical quark masses with well-controlled continuum and infinite volume extrapolations
 
+The non-perturbative study of Quantum Chromodynamics through Lattice QCD simulations at physical quark masses, with well-controlled continuum and infinite volume extrapolations, allows for accurate first-principles predictions of hadronic properties, providing crucial insights into the strong interaction and its role in the Standard Model and beyond.
+Algorithmic and hardware improvements have significantly enhanced the precision and efficiency of Lattice QCD simulations.
+In this report, we present the status of the Extended Twisted Mass Collaboration (ETMC) ensemble generation of \(N_f = 2+1+1\) Wilson clover twisted mass fermions. We discuss the setup used in the Hybrid Monte Carlo (HMC) simulations, including algorithmic improvements and hardware optimizations that have been implemented to enhance the efficiency and precision of our simulations.
+The ensembles are generated using the tmLQCD\footnote{\url{https://github.com/etmc/tmLQCD}} software package which has been extended to use QUDA~\cite{Clark:2009wm,Babich:2011np} to offload most of the calculation to GPUs.
+These ensembles have been utilized in several recent publications~\cite{ExtendedTwistedMass:2021qui,ExtendedTwistedMass:2021gbo,ExtendedTwistedMassCollaborationETMC:2022sta,ExtendedTwistedMass:2022jpw,Alexandrou:2023qbg,ExtendedTwistedMass:2024myu}.
 
 
 \section{Lattice Setup}
@@ -200,7 +205,7 @@ The various inversions required in the heathbath of the pseudofermions, in the f
 \begin{itemize}
   \item $(\hat W_{m+}\hat W_{m-})^{-1}$  is computed with a double-half mixed-precision CG
   \item   $(\hat W_{m+}^{-1}\hat W_{(m-i)+}\hat W_{(m-i)-}\hat W_{m-}^{-1})^{-1}$   is computed with a    double-half mixed precision CG or multigrid-preconditoned GCR depending on $\rho_b$
-  \item  $\prod_{i=n_\ell}^{n_k} \frac{ \Qhat^2_h + a_{2i-1} }{ \Qhat^2_h + a_{2i} }$ is computed with a single precision multi-shift CG with a refinement shift-by-shift in double-half precision 
+  \item  $\prod_{i=n_\ell}^{n_k} \frac{ \Qhat^2_h + a_{2i-1} }{ \Qhat^2_h + a_{2i} }$ is computed with a single precision multi-shift CG with a refinement shift-by-shift in double-half precision
 \end{itemize}
 
 
