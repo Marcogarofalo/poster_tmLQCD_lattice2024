@@ -3,10 +3,9 @@ require(hadron)
 require(dplyr)
 require(patchwork)
 
-ensembles <- c("cB211.072.64", 
-               "cD211.054.96_BC", "cD211.054.96_DE")
-as <- c(0.080, 0.080, 0.080)
-Ls <- c(64, 96, 96)
+ensembles <- c("cB211.072.64", "cB211.072.96")
+as <- c(0.080, 0.080)
+Ls <- c(64, 96)
 
 dat  <- NULL
 gf_summary_dat <- NULL
@@ -85,9 +84,9 @@ lim_dat <- data.frame(ens = rep(dat_stat$ens, each=2),
                                          dat_stat$Qsym_w0_min-0.25*abs(dat_stat$Qsym_w0_max-dat_stat$Qsym_w0_min), 
                                          dat_stat$Qsym_w0_max+0.25*abs(dat_stat$Qsym_w0_max-dat_stat$Qsym_w0_min))))
 
-label_dat <- data.frame(ens = c(ensembles[1], "cD211.054.96"),
+label_dat <- data.frame(ens = ensembles,
                         label = sprintf("$%s, a \\sim %.3f$ fm, $L/a = %d$",
-                                        c(ensembles[1], "cD211.054.96"),
+                                        ensembles,
                                         c(0.080, 0.080),
                                         c(64, 96)),
                         x = rep(250, times=2),
